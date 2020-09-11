@@ -13,6 +13,9 @@ app.use(express.json());
 
 // Routes
 app.use('/api/usuarios', require('./routes/usuario.routes'));
+app.use('/api/publicaciones', require('./routes/publicacion.routes'));
+app.use('/api/bajas', require('./routes/baja.routes'));
+app.use('/api/comentarios', require('./routes/comentario.routes'));
 
 // Starting the server
 app.listen(app.get('port'), () =>{
