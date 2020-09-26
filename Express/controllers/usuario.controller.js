@@ -25,6 +25,7 @@ usuarioCtrl.editUsuario = async (req, res) => {
     const usuario = {
         nombre: req.body.nombre,
         contrasena: req.body.contrasena,
+        tipo: req.body.tipo,
         foto: req.body.foto,
         telefono: req.body.telefono,
         num_reportes: req.body.num_reportes
