@@ -10,7 +10,11 @@ import { SettingsComponent } from './shared/settings/settings.component';
 import { LoginComponent } from './components/login/login.component';
 import { UsersComponent } from './components/users/users.component';
 import { SidemenuComponent } from './shared/sidemenu/sidemenu.component';
+<<<<<<< HEAD
 import { MainComponent } from './components/main/main.component';
+=======
+import { ExamplesComponent } from './components/examples/examples.component';
+>>>>>>> 6162fb60f1f7cf7fe7d669b8e3601da3901711e1
 
 @NgModule({
   declarations: [
@@ -20,7 +24,11 @@ import { MainComponent } from './components/main/main.component';
     LoginComponent,
     UsersComponent,
     SidemenuComponent,
+<<<<<<< HEAD
     MainComponent
+=======
+    ExamplesComponent
+>>>>>>> 6162fb60f1f7cf7fe7d669b8e3601da3901711e1
   ],
   imports: [
     BrowserModule,
