@@ -9,11 +9,8 @@ import { HeaderComponent } from './shared/header/header.component';
 import { SettingsComponent } from './shared/settings/settings.component';
 import { LoginComponent } from './components/login/login.component';
 import { UsersComponent } from './components/users/users.component';
-<<<<<<< HEAD
 import { SidemenuComponent } from './shared/sidemenu/sidemenu.component';
-=======
-import { ExamplesComponent } from './components/examples/examples.component';
->>>>>>> fe8b4f1f1fa63c3113631d36bc5515d82fbd0874
+import { MainComponent } from './components/main/main.component';
 
 @NgModule({
   declarations: [
@@ -22,11 +19,8 @@ import { ExamplesComponent } from './components/examples/examples.component';
     SettingsComponent,
     LoginComponent,
     UsersComponent,
-<<<<<<< HEAD
-    SidemenuComponent
-=======
-    ExamplesComponent
->>>>>>> fe8b4f1f1fa63c3113631d36bc5515d82fbd0874
+    SidemenuComponent,
+    MainComponent
   ],
   imports: [
     BrowserModule,
