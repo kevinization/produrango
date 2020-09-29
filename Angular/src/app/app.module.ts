@@ -8,6 +8,7 @@ import { HeaderComponent } from './shared/header/header.component';
 import { SettingsComponent } from './shared/settings/settings.component';
 import { LoginComponent } from './components/login/login.component';
 import { UsersComponent } from './components/users/users.component';
+import { SidemenuComponent } from './shared/sidemenu/sidemenu.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { UsersComponent } from './components/users/users.component';
     HeaderComponent,
     SettingsComponent,
     LoginComponent,
-    UsersComponent
+    UsersComponent,
+    SidemenuComponent
   ],
   imports: [
     BrowserModule,
