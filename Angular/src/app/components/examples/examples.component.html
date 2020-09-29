@@ -1,0 +1,23 @@
+<p>examples works!</p>
+<form #exampleForm="ngForm" (ngSubmit)="addExample(exampleForm)">
+    <div>
+        <div>
+            <input type="text" name="nombre" #nombre="ngModel" [(ngModel)]="exampleService.selectedExample.nombre" placeholder="Ingresa el nombre">
+        </div>
+        <div>
+            <input type="text" name="contrasena" #contrasena="ngModel" [(ngModel)]="exampleService.selectedExample.contrasena" placeholder="Ingresa la contrasena">
+        </div>
+        <div>
+            <input type="text" name="tipo" #tipo="ngModel" [(ngModel)]="exampleService.selectedExample.tipo" placeholder="Ingresa el tipo">
+        </div>
+        <div>
+            <input type="text" name="foto" #foto="ngModel" [(ngModel)]="exampleService.selectedExample.foto" placeholder="Ingresa la foto">
+        </div>
+        <div>
+            <input type="text" name="telefono" #telefono="ngModel" [(ngModel)]="exampleService.selectedExample.telefono" placeholder="Ingresa el telefono">
+        </div>
+        <div>
+            <input type="text" name="num_reportes" #num_reportes="ngModel" [(ngModel)]="exampleService.selectedExample.num_reportes" placeholder="Ingresa el num de reportes">
+        </div>
+    </div>
+</form>
