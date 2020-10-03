@@ -1,5 +1,6 @@
 <p>examples works!</p>
 <form #exampleForm="ngForm" (ngSubmit)="addExample(exampleForm)">
+    <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="exampleService.selectedExample._id">
     <div>
         <div>
             <input type="text" name="nombre" #nombre="ngModel" [(ngModel)]="exampleService.selectedExample.nombre" placeholder="Ingresa el nombre">
@@ -19,5 +20,46 @@
         <div>
             <input type="text" name="num_reportes" #num_reportes="ngModel" [(ngModel)]="exampleService.selectedExample.num_reportes" placeholder="Ingresa el num de reportes">
         </div>
+        <div>
+            <div>
+                <button (click)=resetForm(exampleForm)>Limpiar</button>
+                <button>Guardar</button>
+            </div>
+        </div>
     </div>
 </form>
+<div>
+    <div>
+        <div>
+            <table>
+                <thead>
+                    <th>Nombre</th>
+                    <th>Contraseña</th>
+                    <th>Tipo</th>
+                    <th>Foto</th>
+                    <th>Telefono</th>
+                    <th>Num. Reportes</th>
+                    <th>Operaciones</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let example of exampleService.examples">
+                        <td>{{ example.nombre }}</td>
+                        <td>{{ example.contrasena }}</td>
+                        <td>{{ example.tipo }}</td>
+                        <td>{{ example.foto }}</td>
+                        <td>{{ example.telefono }}</td>
+                        <td>{{ example.num_reportes }}</td>
+                        <td>
+                            <a (click)="editExample(example)">
+                                <i class="material-icons">edit</i>
+                            </a>
+                            <a (click)="deleteExample(example._id)">
+                                <i class="material-icons">delete</i>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
