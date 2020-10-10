@@ -8,7 +8,14 @@ usuarioCtrl.getUsuarios = async (req, res) => {
 };
 
 usuarioCtrl.createUsuario = async (req, res) => {
-    const usuario = new Usuario (req.body);
+    const usuario = new Usuario ({
+        nombre: req.body.nombre,
+        contrasena: req.body.contrasena,
+        tipo: req.body.tipo,
+        foto: req.body.foto,
+        telefono: req.body.telefono,
+        num_reportes: req.body.num_reportes
+    });
     console.log(usuario);
     await usuario.save();
     res.json({

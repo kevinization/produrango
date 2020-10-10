@@ -13,7 +13,11 @@ import { LoginComponent } from './components/login/login.component';
 import { UsersComponent } from './components/users/users.component';
 import { SidemenuComponent } from './shared/sidemenu/sidemenu.component';
 import { MainComponent } from './components/main/main.component';
+<<<<<<< HEAD
 import { FooterComponent } from './shared/footer/footer.component';
+=======
+import { ExamplesComponent } from './components/examples/examples.component';
+>>>>>>> a5d98359d748dc56791fd2e9ba214bb16680df82
 
 @NgModule({
   declarations: [
@@ -24,7 +28,11 @@ import { FooterComponent } from './shared/footer/footer.component';
     UsersComponent,
     SidemenuComponent,
     MainComponent,
+<<<<<<< HEAD
     FooterComponent
+=======
+    ExamplesComponent
+>>>>>>> a5d98359d748dc56791fd2e9ba214bb16680df82
   ],
   imports: [
     BrowserModule,
