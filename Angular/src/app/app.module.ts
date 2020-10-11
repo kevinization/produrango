@@ -13,6 +13,8 @@ import { SidemenuComponent } from './shared/sidemenu/sidemenu.component';
 import { MainComponent } from './components/main/main.component';
 import { ExamplesComponent } from './components/examples/examples.component';
 import { FooterComponent } from './shared/footer/footer.component';
+import { LoginExampleComponent } from './components/login-example/login-example.component';
+
 
 @NgModule({
   declarations: [
@@ -24,7 +26,8 @@ import { FooterComponent } from './shared/footer/footer.component';
     SidemenuComponent,
     MainComponent,
     ExamplesComponent,
-    FooterComponent
+    FooterComponent,
+    LoginExampleComponent
   ],
   imports: [
     BrowserModule,
