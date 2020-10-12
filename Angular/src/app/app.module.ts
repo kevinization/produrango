@@ -1,8 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
@@ -13,8 +11,9 @@ import { LoginComponent } from './components/login/login.component';
 import { UsersComponent } from './components/users/users.component';
 import { SidemenuComponent } from './shared/sidemenu/sidemenu.component';
 import { MainComponent } from './components/main/main.component';
-import { FooterComponent } from './shared/footer/footer.component';
 import { ExamplesComponent } from './components/examples/examples.component';
+import { FooterComponent } from './shared/footer/footer.component';
+import { LoginExampleComponent } from './components/login-example/login-example.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +25,8 @@ import { ExamplesComponent } from './components/examples/examples.component';
     SidemenuComponent,
     MainComponent,
     FooterComponent,
-    ExamplesComponent
+    ExamplesComponent,
+    LoginExampleComponent
   ],
   imports: [
     BrowserModule,
