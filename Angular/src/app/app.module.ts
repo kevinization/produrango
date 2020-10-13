@@ -14,6 +14,7 @@ import { MainComponent } from './components/main/main.component';
 import { ExamplesComponent } from './components/examples/examples.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { LoginExampleComponent } from './components/login-example/login-example.component';
+import { PublicacionesComponent } from './modals/publicaciones/publicaciones.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { LoginExampleComponent } from './components/login-example/login-example.
     MainComponent,
     FooterComponent,
     ExamplesComponent,
-    LoginExampleComponent
+    LoginExampleComponent,
+    PublicacionesComponent
   ],
   imports: [
     BrowserModule,
