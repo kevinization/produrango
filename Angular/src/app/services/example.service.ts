@@ -13,7 +13,7 @@ export class ExampleService {
 
   constructor(private http: HttpClient) { 
     this.selectedExample = new Example();
-  }
+  } 
 
   getExamples(){
     return this.http.get(this.URL_API);
