@@ -7,47 +7,17 @@
     </div>
   </div>
   <br>
-  <div class="row">
-    <div class="card col-md-5 col-sm-12 imgs" style="width: 18rem;">
-      <img src="../../../assets/images/image1.jpg" class="card-img-top" alt="...">
-      <div class="card-body">
-        <span>By User528</span>
-        <br>
-        <span>November 23, 2020</span>
-        <h5 class="card-title">Did you know ...?</h5>
-        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat soluta illum iure fugit quaerat earum labore maxime consequatur numquam explicabo! Velit molestiae voluptatem excepturi harum ipsum quam vitae quidem totam?</p>
+  <div *ngFor="let publicacion of publicacionService.publicaciones" class="row">
+      <div class="card col-10 offset-1 imgs" >
+        <img src= {{publicacion.archivos}} class="card-img-top" alt="...">
+        <div class="card-body">
+            <span>nombre</span> 
+          <br>
+          <span>{{ publicacion.fecha }}</span>
+          <h5 class="card-title">{{ publicacion.titulo }}</h5>
+          <p class="card-text">{{ publicacion.descripcion }}</p>
+        </div>
       </div>
-    </div>
-    <div class="card col-md-5 col-sm-12 imgs" style="width: 18rem;">
-      <img src="../../../assets/images/image2.jpg" class="card-img-top" alt="...">
-      <div class="card-body">
-        <span>By User528</span>
-        <br>
-        <span>November 23, 2020</span>
-        <h5 class="card-title">Did you know ...?</h5>
-        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat soluta illum iure fugit quaerat earum labore maxime consequatur numquam explicabo! Velit molestiae voluptatem excepturi harum ipsum quam vitae quidem totam?</p>
-      </div>
-    </div>
-    <div class="card col-md-5 col-sm-12 imgs" style="width: 18rem;">
-      <img src="../../../assets/images/image1.jpg" class="card-img-top" alt="...">
-      <div class="card-body">
-        <span>By User528</span>
-        <br>
-        <span>November 23, 2020</span>
-        <h5 class="card-title">Did you know ...?</h5>
-        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat soluta illum iure fugit quaerat earum labore maxime consequatur numquam explicabo! Velit molestiae voluptatem excepturi harum ipsum quam vitae quidem totam?</p>
-      </div>
-    </div>
-    <div class="card col-md-5 col-sm-12 imgs" style="width: 18rem;">
-      <img src="../../../assets/images/image2.jpg" class="card-img-top" alt="...">
-      <div class="card-body">
-        <span>By User528</span>
-        <br>
-        <span>November 23, 2020</span>
-        <h5 class="card-title">Did you know ...?</h5>
-        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat soluta illum iure fugit quaerat earum labore maxime consequatur numquam explicabo! Velit molestiae voluptatem excepturi harum ipsum quam vitae quidem totam?</p>
-      </div>
-    </div>
   </div>
 </div>
 
