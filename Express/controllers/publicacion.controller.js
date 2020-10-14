@@ -8,7 +8,19 @@ publicacionCtrl.getPublicaciones = async (req, res) => {
 };
 
 publicacionCtrl.createPublicacion = async (req, res) => {
-    const publicacion = new Publicacion (req.body);
+    const publicacion = new Publicacion ({
+        titulo: req.body.titulo,
+        fecha: req.body.fecha,
+        categoria: req.body.categoria,
+        descripcion: req.body.descripcion,
+        archivos: req.body.archivos,
+        ubicacion: req.body.ubicacion,
+        denuncias: req.body.denuncias,
+        reincidencias: req.body.reincidencias,
+        confirmacion_reincidencias: req.body.confirmacion_reincidencias,
+        contenido_comentario: req.body.contenido_comentario,
+        nombre_usuario: req.body.nombre_usuario
+    });
     console.log(publicacion);
     await publicacion.save();
     res.json({
