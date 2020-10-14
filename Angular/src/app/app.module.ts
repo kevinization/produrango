@@ -15,6 +15,7 @@ import { ExamplesComponent } from './components/examples/examples.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { LoginExampleComponent } from './components/login-example/login-example.component';
 import { PublicacionesComponent } from './modals/publicaciones/publicaciones.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { PublicacionesComponent } from './modals/publicaciones/publicaciones.com
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
