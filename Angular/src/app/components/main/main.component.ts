@@ -18,7 +18,6 @@ export class MainComponent implements OnInit {
 
   ngOnInit(): void {
     this.getPublicaciones();
-    this.getUsuarios();
   }
   // tslint:disable-next-line: typedef
   getPublicaciones() {
@@ -29,12 +28,5 @@ export class MainComponent implements OnInit {
       });
   }
     // tslint:disable-next-line: typedef
-    getUsuarios() {
-      this.publicacionService.getExamples()
-        .subscribe(res => {
-          this.publicacionService. = res as Example[];
-          console.log(res);
-        });
-    }
 
 }
