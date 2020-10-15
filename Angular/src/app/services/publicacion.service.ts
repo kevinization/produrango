@@ -7,14 +7,22 @@ import { Publicacion } from '../models/publicacion';
 })
 export class PublicacionService {
 
+
+  // tslint:disable-next-line: member-ordering
   selectedPublicacion: Publicacion;
+  // tslint:disable-next-line: member-ordering
   publicaciones: Publicacion[];
+  // tslint:disable-next-line: member-ordering
   readonly URL_API = 'http://localhost:3000/api/publicaciones';
+  readonly URL_API_usuarios = 'http://localhost:3000/api/usuarios';
   constructor(private http: HttpClient) {
       this.selectedPublicacion = new Publicacion();
    }
 
-   getPublicaciones(){
+  getExamples() {
+    return this.http.get(this.URL_API_usuarios);
+  }
+  getPublicaciones(){
     return this.http.get(this.URL_API);
   }
 
