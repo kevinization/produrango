@@ -17,14 +17,9 @@ export class PublicacionService {
   examples: Example[];
   // tslint:disable-next-line: member-ordering
   readonly URL_API = 'http://localhost:3000/api/publicaciones';
-  readonly URL_API_usuarios = 'http://localhost:3000/api/usuarios';
   constructor(private http: HttpClient) {
       this.selectedPublicacion = new Publicacion();
    }
-
-  getExamples() {
-    return this.http.get(this.URL_API_usuarios);
-  }
   getPublicaciones(){
     return this.http.get(this.URL_API);
   }
