@@ -5,6 +5,7 @@ import { Example } from 'src/app/models/example';
 
 import { PublicacionService } from '../../services/publicacion.service';
 import { ExampleService } from '../../services/example.service';
+import { SocialUser, SocialAuthService } from "angularx-social-login";
 
 @Component({
   selector: 'app-main',
@@ -13,10 +14,16 @@ import { ExampleService } from '../../services/example.service';
   providers: [PublicacionService, ExampleService]
 })
 export class MainComponent implements OnInit {
-
-  constructor(public publicacionService: PublicacionService, exampleService: ExampleService) { }
+  user: SocialUser;
+  loggedIn: boolean;
+  constructor(public publicacionService: PublicacionService, exampleService: ExampleService, private authService: SocialAuthService) { }
 
   ngOnInit(): void {
+    this.authService.authState.subscribe((user) => {
+      this.user = user;
+      console.log(user);
+      this.loggedIn = (user != null);
+    });
     this.getPublicaciones();
   }
   // tslint:disable-next-line: typedef
@@ -28,5 +35,12 @@ export class MainComponent implements OnInit {
       });
   }
     // tslint:disable-next-line: typedef
+    /*/getUsuarios() {
+      this.publicacionService.getExamples()
+        .subscribe(res => {
+          this.publicacionService. = res as Example[];
+          console.log(res);
+        });
+    }*/
 
 }

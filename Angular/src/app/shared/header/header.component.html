@@ -53,7 +53,16 @@
               </li>
           </ul>        
         </div>
-      <div class="app-header-right">
+
+        <div class="app-header-right" *ngIf="user==null">
+            <button class="btn" type="button" data-toggle="modal" data-target="#loginModal">
+                Iniciar Sesión
+            </button>
+        </div>
+
+
+
+      <div class="app-header-right" *ngIf="user">
           <div class="header-btn-lg pr-0">
               <div class="widget-content p-0">
                   <div class="widget-content-wrapper">
@@ -98,22 +107,23 @@
                         </div>
                         <div class="btn-group">
                                 <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="p-0 btn">
-                                    <img width="42" class="rounded-circle" src="../../../assets/images/user.png" alt="">
+                                    <img width="42" class="rounded-circle" src="{{user.photoUrl}}" alt="">
                                     <i class="fa fa-angle-down ml-2 opacity-8"></i>
                                 </a>
                                 <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right">
                                     <button type="button" tabindex="0" class="dropdown-item">User Account</button>
                                     <button type="button" tabindex="0" class="dropdown-item">Settings</button>
-                                    <h6 tabindex="-1" class="dropdown-header">Header</h6>
+                                    <h6 tabindex="-1" class="dropdown-header">{{user.name}}</h6>
+                                    <h6 tabindex="-1" class="dropdown-header">{{user.email}}</h6>
                                     <div tabindex="-1" class="dropdown-divider"></div>
-                                    <button type="button" tabindex="0" class="dropdown-item">Log out</button>
+                                    <button type="button" tabindex="0" class="dropdown-item" (click)="signOut()">Log out</button>
                                 </div>
                         </div>
 
                       </div>
                       <div class="widget-content-left  ml-3 header-user-info">
                           <div class="widget-heading">
-                              Admin
+                              {{user.name}}
                           </div>
                       </div>
                   </div>

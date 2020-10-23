@@ -19,6 +19,7 @@ export class ExamplesComponent implements OnInit {
   }
   // tslint:disable-next-line: typedef
   addExample(form: NgForm) {
+    console.log(form.value);
     if (form.value._id){
       this.exampleService.putExample(form.value)
         .subscribe(res => {

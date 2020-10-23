@@ -1,8 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Publicacion } from 'src/app/models/publicacion';
-import {NgbModalRef, ModalDismissReasons, NgbDateStruct} from "@ng-bootstrap/ng-bootstrap";
-
 import { PublicacionService } from '../../services/publicacion.service';
 
 
@@ -14,10 +12,8 @@ import { PublicacionService } from '../../services/publicacion.service';
 })
 export class PublicacionesComponent implements OnInit {
 
-  modal: NgbModalRef;
-
   constructor(public publicacionService: PublicacionService) { }
-
+  
   ngOnInit(): void {
     this.getPublicaciones();
   }
@@ -72,5 +68,4 @@ export class PublicacionesComponent implements OnInit {
         this.publicacionService.selectedPublicacion = new Publicacion();
       }
     }
-
 }

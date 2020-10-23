@@ -1,0 +1,32 @@
+<!-- Modal Login-->
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Inicio de sesión</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="position-relative form-group">
+                <label for="Correo">Correo electrónico</label>
+                <input type="text" name="Correo" id="Correo" placeholder="example@hotmail.com" class="form-control form-control-sm">
+            </div>
+            <div class="position-relative form-group">
+                <label for="Correo">Contraseña</label>
+                <input type="password" name="Clave" id="Clave" placeholder="Contraseña" class="form-control form-control-sm">
+            </div>
+            <div class="position-relative">
+                <button class="btn btn-dark form-control">INICIAR SESIÓN</button>
+                <br>
+                <button class="btn btn-danger form-control" (click)="signInWithGoogle()">INICIAR SESIÓN CON GOOGLE <i class="fa fa-google text-white"></i></button>
+                <br>
+                <button class="btn btn-primary form-control" (click)="signInWithFB()">INICIAR SESIÓN CON FACEBOOK <i class="fa fa-facebook"></i></button>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!--End Modal Login-->

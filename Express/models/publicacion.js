@@ -12,7 +12,7 @@ descripcion: { type: String, /*required: true*/ },
     reincidencias: { type: Number, /*required: true*/ },
     confirmacion_reincidencias: { type: Boolean},
     contenido_comentario: { type: String },
-    nombre_usuario: { type: String }
+    nombre_usuario: { type: Schema.ObjectId, ref: "Usuario" }
 
 });
 
