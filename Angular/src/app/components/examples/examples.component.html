@@ -1,5 +1,6 @@
 <p>examples works!</p>
 <form #exampleForm="ngForm" (ngSubmit)="addExample(exampleForm)">
+    <div id="mensajeGuardarExample"></div>
     <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="exampleService.selectedExample._id">
     <div>
         <div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Example } from 'src/app/models/example';
 
@@ -10,7 +10,7 @@ import { ExampleService } from '../../services/example.service';
   styleUrls: ['./examples.component.css'],
   providers: [ExampleService]
 })
-export class ExamplesComponent implements OnInit {
+export class ExamplesComponent implements OnInit { 
 
   constructor(public exampleService: ExampleService) { }
 
@@ -39,6 +39,7 @@ export class ExamplesComponent implements OnInit {
         });
     }
   }
+
   // tslint:disable-next-line: typedef
   getExamples() {
     this.exampleService.getExamples()
