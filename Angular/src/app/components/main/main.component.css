@@ -13,3 +13,7 @@
  .username :hover{
     color: blue;
  }
+
+ .imgArchivo{
+     height: 15em !important;
+ }

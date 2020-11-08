@@ -1,8 +1,20 @@
 export class Publicacion {
+    _id: string;
+    titulo: string;
+    fecha: string;
+    categoria: string;
+    descripcion: string;
+    archivos: string;
+    ubicacion: string;
+    denuncias: number;
+    reincidencias: number;
+    confirmacion_reincidencias: boolean;
+    contenido_comentario: string;
+    nombre_usuario: string;
 
-    constructor(_id = '', titulo = '', fecha = '', categoria = '', descripcion = '',
-                archivos = '', ubicacion = '', denuncias = 0, reincidencias = 0, confirmacion_reincidencias = false,
-                 contenido_comentario = '', nombre_usuario = '' ){
+    constructor(_id = '', titulo = '', fecha = '', categoria = '', descripcion = '', archivos = '',
+                ubicacion = '', denuncias = 0, reincidencias = 0, confirmacion_reincidencias = false,
+                contenido_comentario = '', nombre_usuario = '' ){
         this._id = _id;
         this.titulo = titulo;
         this.fecha = fecha;
@@ -17,16 +29,4 @@ export class Publicacion {
         this.nombre_usuario = nombre_usuario;
 
     }
-    _id: string;
-    titulo: string;
-    fecha: string;
-    categoria: string;
-    descripcion: string;
-    archivos: string;
-    ubicacion: string;
-    denuncias: number;
-    reincidencias: number;
-    confirmacion_reincidencias: boolean;
-    contenido_comentario: string;
-    nombre_usuario: string;
 }

@@ -13,7 +13,6 @@ import { PublicacionService } from '../../services/publicacion.service';
 export class PublicacionesComponent implements OnInit {
 
   constructor(public publicacionService: PublicacionService) { }
-  
   ngOnInit(): void {
     this.getPublicaciones();
   }
@@ -62,7 +61,7 @@ export class PublicacionesComponent implements OnInit {
       }
     }
     // tslint:disable-next-line: typedef
-    resetForm(form?: NgForm) {
+    resetForm(form: NgForm) {
       if (form){
         form.reset();
         this.publicacionService.selectedPublicacion = new Publicacion();
