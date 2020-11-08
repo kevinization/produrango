@@ -24,6 +24,7 @@ import { LoginExampleComponent } from './components/login-example/login-example.
 import { PublicacionesComponent } from './modals/publicaciones/publicaciones.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from './modals/login/login.component';
+import { AuthModule } from './auth/auth.module';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { LoginComponent } from './modals/login/login.component';
     FormsModule,
     HttpClientModule,
     NgbModule,
-    SocialLoginModule
+    SocialLoginModule,
+    AuthModule
   ],
   providers: [
     {
