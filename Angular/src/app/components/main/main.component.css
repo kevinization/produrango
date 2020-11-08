@@ -1,14 +1,17 @@
+.card {
+    padding: 2%;
+    margin-left: 4%;
+    margin-right: 4%;
+    margin-bottom: 2%;
+}
 
- .card {
-     padding: 2%;
-     margin-left: 4%;
-     margin-right: 4%;
-     margin-bottom: 2%;
- }
+.username{
+    color: blueviolet;
+}
 
- .username{
-     color: blueviolet;
- }
+.username :hover{
+   color: blue;
+}
 
  .username :hover{
     color: blue;
