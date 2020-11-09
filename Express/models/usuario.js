@@ -2,12 +2,13 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const usuarioSchema = new Schema({
-    nombre: { type: String, required: true},
-    contrasena: { type: String, required: true},
-    tipo: { type: String, required: true},
+    authT: { type: String, required: true},
+    name: { type: String, required: true},
+    email: { type: String, required: true},
+    tipo: { type: String},
     foto: { type: String},
     telefono: { type: String},
-    num_reportes: { type: Number, required: true}
+    num_reportes: { type: Number }
 
 });
 

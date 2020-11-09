@@ -8,18 +8,24 @@ usuarioCtrl.getUsuarios = async (req, res) => {
 };
 
 usuarioCtrl.createUsuario = async (req, res) => {
+    let  AT = req.body.authT;
     const usuario = new Usuario ({
-        nombre: req.body.nombre,
-        contrasena: req.body.contrasena,
-        tipo: req.body.tipo,
-        foto: req.body.foto,
-        telefono: req.body.telefono,
-        num_reportes: req.body.num_reportes
+        authT: req.body.authT,
+        name: req.body.name,
+        email: req.body.email,
+        foto: req.body.foto
     });
     console.log(usuario);
-    await usuario.save();
-    res.json({
-        'status': 'Usuario guardado'
+
+    await Usuario.findOne({authT: AT}).exec((error, admin) => {
+        if(!error){
+            res.status(200).json(admin);
+        }else{
+            usuario.save();
+            res.json({
+                'status': 'Usuario guardado'
+            });
+        }
     });
 };
 
