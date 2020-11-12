@@ -40,7 +40,7 @@
           </div>
           <ul class="header-menu nav">
               <li class="nav-item">
-                  <a href="javascript:void(0);" class="nav-link">
+                  <a href="#" class="nav-link">
                       <i class="nav-link-icon fa fa-home"> </i>
                       Home
                   </a>
@@ -54,15 +54,15 @@
           </ul>        
         </div>
 
-        <div class="app-header-right" *ngIf="appComponent.logged === false">
-            <button class="btn" type="button" data-toggle="modal" data-target="#loginModal">
-                Iniciar Sesión
-            </button>
+        <div class="app-header-right" *ngIf="logged == false">
+            <a href="login" class="btn"> Iniciar sesión
+                <i class="fas fa-sign-in-alt"></i>
+            </a>
         </div>
 
 
 
-      <div class="app-header-right" *ngIf="appComponent.logged === true">
+      <div class="app-header-right" *ngIf="logged === true">
           <div class="header-btn-lg pr-0">
               <div class="widget-content p-0">
                   <div class="widget-content-wrapper">
@@ -107,14 +107,14 @@
                         </div>
                         <div class="btn-group">
                                 <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="p-0 btn">
-                                    <img width="42" class="rounded-circle" src="{{appComponent.foto}}" alt="">
+                                    <img width="42" class="rounded-circle" src="foto" alt="">
                                     <i class="fa fa-angle-down ml-2 opacity-8"></i>
                                 </a>
                                 <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right">
                                     <button type="button" tabindex="0" class="dropdown-item">User Account</button>
                                     <button type="button" tabindex="0" class="dropdown-item">Settings</button>
-                                    <h6 tabindex="-1" class="dropdown-header">{{appComponent.user}}</h6>
-                                    <h6 tabindex="-1" class="dropdown-header">{{appComponent.email}}</h6>
+                                    <h6 tabindex="-1" class="dropdown-header">{{username}}</h6>
+                                    <h6 tabindex="-1" class="dropdown-header">Email</h6>
                                     <div tabindex="-1" class="dropdown-divider"></div>
                                     <button type="button" tabindex="0" class="dropdown-item" >Log out</button>
                                 </div>

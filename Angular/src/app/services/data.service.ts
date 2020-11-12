@@ -8,6 +8,7 @@ import { Subject, Observable } from 'rxjs';
 export class DataService {
 
   readonly URL_API = 'http://localhost:3000/api/usuarios';
+  readonly URL_LOG = 'http://localhost:3000/api/usuarios/activos';
 
   constructor(private _client: HttpClient) { }
   authUser( aT: string, correo: string, nombre: string, fot: string){
@@ -19,4 +20,13 @@ export class DataService {
     }
     return this._client.post(this.URL_API, newData);
   }
+
+  activeUser( aT: string){
+    let newAuth = {
+      authT: aT
+    }
+    return this._client.post(this.URL_LOG, newAuth);
+  }
+
+
 }

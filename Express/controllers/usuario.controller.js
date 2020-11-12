@@ -19,7 +19,9 @@ usuarioCtrl.createUsuario = async (req, res) => {
 
     await Usuario.findOne({authT: AT}).exec((error, admin) => {
         if(!error){
-            res.status(200).json(admin);
+            res.json({
+                'status': 'Usuario existente'
+            });
         }else{
             usuario.save();
             res.json({

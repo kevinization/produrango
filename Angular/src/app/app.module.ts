@@ -20,11 +20,8 @@ import { SidemenuComponent } from './shared/sidemenu/sidemenu.component';
 import { MainComponent } from './components/main/main.component';
 import { ExamplesComponent } from './components/examples/examples.component';
 import { FooterComponent } from './shared/footer/footer.component';
-import { LoginExampleComponent } from './components/login-example/login-example.component';
 import { PublicacionesComponent } from './modals/publicaciones/publicaciones.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { LoginComponent } from './modals/login/login.component';
-import { AuthModule } from './auth/auth.module';
 
 @NgModule({
   declarations: [
@@ -36,9 +33,7 @@ import { AuthModule } from './auth/auth.module';
     MainComponent,
     FooterComponent,
     ExamplesComponent,
-    LoginExampleComponent,
     PublicacionesComponent,
-    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -46,8 +41,7 @@ import { AuthModule } from './auth/auth.module';
     FormsModule,
     HttpClientModule,
     NgbModule,
-    SocialLoginModule,
-    AuthModule
+    SocialLoginModule
   ],
   providers: [
     {

@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Publicacion } from 'src/app/models/publicacion';
+import { AppComponent } from 'src/app/app.component';
 
 import { PublicacionService } from '../../services/publicacion.service';
 import { ExampleService } from '../../services/example.service';
-import { SocialUser, SocialAuthService } from "angularx-social-login";
 
 @Component({
   selector: 'app-main',
@@ -13,16 +13,18 @@ import { SocialUser, SocialAuthService } from "angularx-social-login";
   providers: [PublicacionService]
 })
 export class MainComponent implements OnInit {
-  user: SocialUser;
-  loggedIn: boolean;
-  constructor(public publicacionService: PublicacionService, exampleService: ExampleService, private authService: SocialAuthService) { }
+  logged: boolean;
+  private _username = "";
+  public get username() {
+    return this._username;
+  }
+  public set username(value) {
+    this._username = value;
+  }
+  constructor(public publicacionService: PublicacionService, exampleService: ExampleService) { }
 
   ngOnInit(): void {
-    this.authService.authState.subscribe((user) => {
-      this.user = user;
-      console.log(user);
-      this.loggedIn = (user != null);
-    });
+    this.logged = AppComponent.logged;
     this.getPublicaciones();
   }
   // tslint:disable-next-line: typedef
@@ -32,6 +34,13 @@ export class MainComponent implements OnInit {
         this.publicacionService.publicaciones = res as Publicacion[];
         console.log(res);
       });
+  }
+
+  ngAfterContentChecked(): void {
+    this.logged = AppComponent.logged;
+    if (this.logged === true) {
+      this.username = AppComponent.user;
+    }
   }
 
   aumentarDen(den: number){
