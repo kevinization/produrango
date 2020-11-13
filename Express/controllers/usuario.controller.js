@@ -8,17 +8,16 @@ usuarioCtrl.getUsuarios = async (req, res) => {
 };
 
 usuarioCtrl.createUsuario = async (req, res) => {
-    let  AT = req.body.authT;
     const usuario = new Usuario ({
-        authT: req.body.authT,
+        provider: req.body.provider,
         name: req.body.name,
         email: req.body.email,
         foto: req.body.foto
     });
     console.log(usuario);
 
-    await Usuario.findOne({authT: AT}).exec((error, admin) => {
-        if(!error){
+    await Usuario.findOne({provider: req.body.provider, email: req.body.email}).exec((error, admin) => {
+        if(admin != null){
             res.json({
                 'status': 'Usuario existente'
             });
@@ -31,9 +30,19 @@ usuarioCtrl.createUsuario = async (req, res) => {
     });
 };
 
-usuarioCtrl.getUsuario = async (req, res) => {
-    const usuario = await Usuario.findById(req.params.id);
-    res.json(usuario);
+usuarioCtrl.getU = async (req, res) => {
+    if((req.params.authT) !== undefined || (req.params.authT) !== "" ){
+        const usuario = await Usuario.findOne({authT: req.params.aT}).exec((error, user) => {
+            if(!error){
+                if(user != null){
+                    res.json(user);
+                }
+            }
+            else{
+                res.status(500).json(error);
+            }
+        });
+    }
 };
 
 usuarioCtrl.editUsuario = async (req, res) => {

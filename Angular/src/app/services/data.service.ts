@@ -7,26 +7,39 @@ import { Subject, Observable } from 'rxjs';
 })
 export class DataService {
 
-  readonly URL_API = 'http://localhost:3000/api/usuarios';
-  readonly URL_LOG = 'http://localhost:3000/api/usuarios/activos';
+  readonly URL_API = 'http://localhost:3000/api/usuarios/';
+  readonly URLLOG = 'http://localhost:3000/api/activos/';
 
   constructor(private _client: HttpClient) { }
-  authUser( aT: string, correo: string, nombre: string, fot: string){
+  authUser( prvd: string, correo: string, nombre: string, fot: string){
     let newData = {
-      authT: aT,
+      provider: prvd,
       email: correo,
       name: nombre,
       foto: fot
-    }
+    };
     return this._client.post(this.URL_API, newData);
   }
 
-  activeUser( aT: string){
+  activeUser( prvd: string, correo: string){
     let newAuth = {
-      authT: aT
-    }
-    return this._client.post(this.URL_LOG, newAuth);
+      provider: prvd,
+      email: correo
+    };
+    return this._client.post(this.URLLOG, newAuth);
   }
+
+  searchUser( aT: string){
+    let _authT = aT;
+    return this._client.get(this.URLLOG + _authT);
+  }
+
+  searchData(aT: string){
+    let _authT = aT;
+    return this._client.get(this.URL_API + _authT);
+  }
+
+
 
 
 }

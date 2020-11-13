@@ -18,17 +18,10 @@ let aUser = ("./models/activo");
 
 // Routes
 app.use('/api/usuarios', require('./routes/usuario.routes'));
-//app.use('/api/usuarios/activos', require('./routes/activos.routes'));
 app.use('/api/publicaciones', require('./routes/publicacion.routes'));
 app.use('/api/bajas', require('./routes/baja.routes'));
 app.use('/api/comentarios', require('./routes/comentario.routes'));
-
-
-router.post('/api/usuarios/activos', function(req, res) {
-    var data = req.body.authT;
-    console.log(data);
-});
-
+app.use('/api/activos', require('./routes/activos.routes'));
 
 // Starting the server
 app.listen(app.get('port'),() => {

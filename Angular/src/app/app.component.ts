@@ -40,5 +40,21 @@ export class AppComponent{
   }
   static _foto: string = '';
 
+  static get AT(): string {
+    return AppComponent._AT;
+  }
+  static set AT(value: string) {
+    AppComponent._AT = value;
+  }
+  static _AT: string = '';
+
+  static get provider(): string {
+    return AppComponent._provider;
+  }
+  static set provider(value: string) {
+    AppComponent._provider = value;
+  }
+  static _provider: string = '';
+
   logged: boolean = AppComponent.logged;
 }

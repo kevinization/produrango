@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterModule, Router, NavigationEnd } from '@angular/router';
 import { AppComponent } from 'src/app/app.component';
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'app-header',
@@ -10,8 +11,9 @@ import { AppComponent } from 'src/app/app.component';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private dataService: DataService) { }
 
+  AT: string;
   logged: boolean;
 
   private _username = '';
@@ -30,6 +32,14 @@ export class HeaderComponent implements OnInit {
     this._email = value;
   }
 
+  private _provider = "";
+  public get provider() {
+    return this._provider;
+  }
+  public set provider(value) {
+    this._provider = value;
+  }
+  
   private _foto = "";
   public get foto() {
     return this._foto;
@@ -43,6 +53,8 @@ export class HeaderComponent implements OnInit {
     this.logged = AppComponent.logged;
     this.email = AppComponent.email;
     this.foto = AppComponent.foto;
+    this.AT = AppComponent.AT;
+    this.provider = AppComponent.provider;
   }
 
   ngAfterContentChecked(): void {
