@@ -12,7 +12,8 @@ usuarioCtrl.createUsuario = async (req, res) => {
         provider: req.body.provider,
         name: req.body.name,
         email: req.body.email,
-        foto: req.body.foto
+        foto: req.body.foto,
+        tipo: req.body.tipo
     });
     console.log(usuario);
 
