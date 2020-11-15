@@ -57,4 +57,21 @@ export class AppComponent{
   static _provider: string = '';
 
   logged: boolean = AppComponent.logged;
+
+    // Cosas para la implementación de Angular Google Maps
+    lat: number;
+    lng: number;
+    zoom: number;
+    mapTypeId: string;
+    located: boolean;
+
+    constructor(){
+      navigator.geolocation.getCurrentPosition(position => {
+        this.lat = position.coords.latitude;
+        this.lng = position.coords.longitude;
+        this.zoom = 17;
+        // located se pone en true al presionar el botón para obtener la posición actual para que el marcador aparezca
+        this.located = true;
+      });
+    }
 }

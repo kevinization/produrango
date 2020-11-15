@@ -22,6 +22,7 @@ import { ExamplesComponent } from './components/examples/examples.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { PublicacionesComponent } from './modals/publicaciones/publicaciones.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     FormsModule,
     HttpClientModule,
     NgbModule,
-    SocialLoginModule
+    SocialLoginModule,
+    AgmCoreModule.forRoot({
+      apiKey: ''
+    })
   ],
   providers: [
     {
