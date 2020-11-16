@@ -3,55 +3,62 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Añadir una publicación :u</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Añadir una publicación</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <form #publicacionForm="ngForm" (ngSubmit)="addPublicacion(publicacionForm)">
-          <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="publicacionService.selectedPublicacion._id">
+        <form >
+          <input type="hidden" name="_id" id="_id" [(ngModel)]="id">
           <div class="modal-body">
             <div class="position-relative form-group">
                 <label for="">Titulo</label>
-                <input type="text" name="titulo" class="form-control" #titulo="ngModel" [(ngModel)]="publicacionService.selectedPublicacion.titulo" placeholder="Título aterrador 8(">
-            </div>
-            <div class="position-relative form-group">
-                <label for="">Fecha</label>
-                <input type="text" name="fecha" class="form-control" #titulo="ngModel" [(ngModel)]="publicacionService.selectedPublicacion.fecha" placeholder="12/10/2020">
+                <input type="text" name="titulo" id="titulo" class="form-control" [(ngModel)]="titulo" placeholder="Título">
             </div>
             <div class="position-relative form-group">
                 <label for="categoria" class="">Categoría</label>
-                <select [(ngModel)]="publicacionService.selectedPublicacion.categoria" name="select" id="categoria" class="form-control">
+                <select [(ngModel)]="categoria" name="select" id="categoria" class="form-control">
                     <option disabled="true" selected >- Seleccione el tipo de publicación -</option>
-                    <option>Reporte</option>
-                    <option>Denuncia</option>
+                    <option>Educación</option>
+                    <option>Salud</option>
+                    <option>Seguridad</option>
+                    <option>Otro</option>
                 </select>
             </div>
             <div class="position-relative form-group">
                 <label for="">Descripcion</label>
-                <input type="text" name="descripcion" class="form-control" #descripcion="ngModel" [(ngModel)]="publicacionService.selectedPublicacion.descripcion" placeholder="Descripción shidori uwu">
+                <input type="text" name="descripcion" id="descripcion" class="form-control" [(ngModel)]="descripcion" placeholder="Descripción">
             </div>
             <div class="position-relative form-group">
                 <label for="">Archivos</label>
-                <input type="text" name="archivos" class="form-control" #titulo="ngModel" [(ngModel)]="publicacionService.selectedPublicacion.archivos" placeholder="opcional">
+                <input type="text" name="archivos" id="archivos" class="form-control" [(ngModel)]="archivos" placeholder="Opcional">
             </div>
-            <div class="position-relative form-group">
-                <label for="">ubicación</label>
-                <input type="text" name="ubicacion" class="form-control" #titulo="ngModel" [(ngModel)]="publicacionService.selectedPublicacion.ubicacion" placeholder="Jupiter">
-            </div>
-            <div class="position-relative form-group">
-                <label for="">denuncias</label>
-                <input type="text" name="denuncias" class="form-control" #titulo="ngModel" [(ngModel)]="publicacionService.selectedPublicacion.denuncias" placeholder="0">
-            </div>
-            <div class="position-relative form-group">
-                <label for="">reincidencias</label>
-                <input type="text" name="reincidencia" class="form-control" #titulo="ngModel" [(ngModel)]="publicacionService.selectedPublicacion.reincidencias" placeholder="1">
+            <div class="position-relative form-group d-flex justify-content-center">
+
+              <div class="card" style="width: 29rem;">
+                <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [disableDefaultUI]="false" (mapClick)="mapClicked($event)">
+                  <agm-marker [latitude]="m.lat" [longitude]="m.lng" [label]="m.label" [markerDraggable]="m.draggable" *ngFor="let m of markers; let i = index" (markerClick)="clickedMarker(m.label, i)" (dragEnd)="markerDragEnd(m, $event)">
+                    <agm-info-window>
+                      <h5>Título</h5>
+                      <span>Descripción</span>
+                    </agm-info-window>
+                  </agm-marker> 
+                </agm-map>
+                <div class="card-body">
+                  <!-- <h5 class="card-title">Card title</h5> -->
+                  <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+                  <a href="#" class="btn btn-primary  d-flex justify-content-center" name="ubicacion" id="ubicacion" [(ngModel)]="ubicacion" (click)="obtenerPosicionActual()">Seleccionar mi ubicación actual</a>
+                  <a href="#" class="btn btn-primary  d-flex justify-content-center" name="ubicacion2" id="ubicacion2" [(ngModel)]="ubicacion" (click)="posicionMarcador()">Confirmar ubicacion</a>
+                  
+                </div>
+              </div>
+
             </div>
           </div>
           
           <div class="modal-footer">
-            <button (click)=resetForm(publicacionForm) class="btn btn-primary">Limpiar</button>
-            <button class="btn btn-primary" >Publicar</button>
+            <button class="btn btn-primary">Limpiar</button>
+            <button class="btn btn-primary" (click)="addPublicacion()">Publicar</button>
           </div>
           
         </form>

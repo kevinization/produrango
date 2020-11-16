@@ -24,8 +24,20 @@ export class PublicacionService {
     return this.http.get(this.URL_API);
   }
 
-  postPublicacion(Publicacion: Publicacion){
-    return this.http.post(this.URL_API, Publicacion);
+  postPublicacion(tit: string, fe: string, cat: string, des: string,
+                  arch: string, ub: string, den: number, rein: number, username: string){
+    let newPublicacion = {
+      titulo : tit,
+      fecha: fe,
+      categoria: cat,
+      descripcion: des,
+      archivos: arch,
+      ubicacion: ub,
+      denuncias: den,
+      reincidencias: rein,
+      nombre_usuario: username
+    };
+    return this.http.post(this.URL_API, newPublicacion);
   }
 
   putPublicacion(publicacion: Publicacion){
