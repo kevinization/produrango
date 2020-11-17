@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Publicacion } from 'src/app/models/publicacion';
 import { PublicacionService } from '../../services/publicacion.service';
-import { AgmCoreModule } from '@agm/core';
+import { MouseEvent } from '@agm/core';
 
 
 @Component({
@@ -11,36 +11,13 @@ import { AgmCoreModule } from '@agm/core';
   styleUrls: ['./publicaciones.component.css']
 })
 export class PublicacionesComponent implements OnInit {
+  lat = 24.0277;
+  lng = -104.653;
+  zoom = 6;
+  mapTypeId = 'roadmap';
+  located = false;
 
-
-  constructor(public publicacionService: PublicacionService) {
-
-   }
-
-  id: string;
-  titulo: string;
-  fecha: string;
-  categoria: string;
-  descripcion: string;
-  archivos: string;
-  ubicacion: string;
-  denuncias: number;
-  reincidencias: number;
-  user: string;
-
-  lat: number;
-  lng: number;
-  zoom: number;
-
-  ngOnInit(): void {
-    this.getPublicaciones();
-    this.conectarDatos();
-
-    this.lat = 24.0277;
-    this.lng = -104.653;
-    this.zoom = 15;
-
-  }
+  markers: marker[] = [];
 
   // tslint:disable-next-line: typedef
   clickedMarker(label: string, index: number) {
@@ -59,18 +36,12 @@ export class PublicacionesComponent implements OnInit {
   // tslint:disable-next-line: typedef
   markerDragEnd(m: marker, $event: MouseEvent) {
     console.log('dragEnd', m, $event);
+    console.log('la latitud es: ' + $event.coords.lat);
+    console.log('la longitud es: ' + $event.coords.lng);
+
+    this.lat = $event.coords.lat;
+    this.lng = $event.coords.lng;
   }
-  // tslint:disable-next-line: member-ordering
-  markers: marker[] = [
-    {
-      lat: 24.0279,
-      lng: -104.67,
-      label: 'A',
-      draggable: true
-    },
-  ];
-
-
 
    // tslint:disable-next-line: typedef
    obtenerPosicionActual(){
@@ -82,10 +53,45 @@ export class PublicacionesComponent implements OnInit {
     });
   }
 
-  // tslint:disable-next-line: typedef
-  posicionMarcador(){
+    // tslint:disable-next-line: typedef
+    coordsFinales(){
+      console.log('LATITUD FINAL: ' + this.lat);
+      console.log('LONGITUD FINAL: ' + this.lng);
+    }
 
+  constructor(public publicacionService: PublicacionService) {
+
+   }
+
+  // tslint:disable-next-line: member-ordering
+  id: string;
+  // tslint:disable-next-line: member-ordering
+  titulo: string;
+  // tslint:disable-next-line: member-ordering
+  fecha: string;
+  // tslint:disable-next-line: member-ordering
+  categoria: string;
+  // tslint:disable-next-line: member-ordering
+  descripcion: string;
+  // tslint:disable-next-line: member-ordering
+  archivos: string;
+  // tslint:disable-next-line: member-ordering
+  ubicacion: string;
+  // tslint:disable-next-line: member-ordering
+  denuncias: number;
+  // tslint:disable-next-line: member-ordering
+  reincidencias: number;
+  // tslint:disable-next-line: member-ordering
+  user: string;
+
+  ngOnInit(): void {
+    this.getPublicaciones();
+    this.conectarDatos();
   }
+
+
+
+
 
 
 

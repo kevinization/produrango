@@ -36,19 +36,34 @@
             <div class="position-relative form-group d-flex justify-content-center">
 
               <div class="card" style="width: 29rem;">
-                <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [disableDefaultUI]="false" (mapClick)="mapClicked($event)">
-                  <agm-marker [latitude]="m.lat" [longitude]="m.lng" [label]="m.label" [markerDraggable]="m.draggable" *ngFor="let m of markers; let i = index" (markerClick)="clickedMarker(m.label, i)" (dragEnd)="markerDragEnd(m, $event)">
-                    <agm-info-window>
+                <agm-map 
+                [latitude]="lat" 
+                [longitude]="lng" 
+                [zoom]="zoom" 
+                [mapTypeId]="mapTypeId"
+                (mapClick)="mapClicked($event)"> <!-- Creación del mapa -->
+
+                  <agm-marker
+                  *ngFor="let m of markers; let i = index"
+                  (markerClick)="clickedMarker(m.label, i)"
+                  [latitude]="m.lat" 
+                  [longitude]="m.lng" 
+                  [label]="m.label" 
+                  [markerDraggable]="m.draggable" 
+                  (dragEnd)="markerDragEnd(m, $event)"> <!-- Creación el marcaor -->
+
+                    <agm-info-window> <!-- Es la información que sale al darle click al marcador -->
                       <h5>Título</h5>
                       <span>Descripción</span>
                     </agm-info-window>
+
                   </agm-marker> 
                 </agm-map>
                 <div class="card-body">
                   <!-- <h5 class="card-title">Card title</h5> -->
                   <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
                   <a href="#" class="btn btn-primary  d-flex justify-content-center" name="ubicacion" id="ubicacion" [(ngModel)]="ubicacion" (click)="obtenerPosicionActual()">Seleccionar mi ubicación actual</a>
-                  <a href="#" class="btn btn-primary  d-flex justify-content-center" name="ubicacion2" id="ubicacion2" [(ngModel)]="ubicacion" (click)="posicionMarcador()">Confirmar ubicacion</a>
+                  <a href="#" class="btn btn-primary  d-flex justify-content-center" name="ubicacion2" id="ubicacion2" [(ngModel)]="ubicacion" (click)="coordsFinales()">Confirmar ubicacion</a>
                   
                 </div>
               </div>
