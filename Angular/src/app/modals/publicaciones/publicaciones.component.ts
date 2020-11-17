@@ -16,6 +16,7 @@ export class PublicacionesComponent implements OnInit {
   zoom = 6;
   mapTypeId = 'roadmap';
   located = false;
+  limitacionMarcador = 0;
 
   markers: marker[] = [];
 
@@ -26,11 +27,16 @@ export class PublicacionesComponent implements OnInit {
 
   // tslint:disable-next-line: typedef
   mapClicked($event: MouseEvent) {
-    this.markers.push({
-      lat: $event.coords.lat,
-      lng: $event.coords.lng,
-      draggable: true
-    });
+    this.limitacionMarcador ++;
+    if (this.limitacionMarcador === 1){
+      this.markers.push({
+        lat: $event.coords.lat,
+        lng: $event.coords.lng,
+        draggable: true
+      });
+    }
+    console.log('lat del marcador apenas es colocado: ' + this.lat);
+    console.log('lng del marcador apenas es colocado: ' + this.lng);
   }
 
   // tslint:disable-next-line: typedef
