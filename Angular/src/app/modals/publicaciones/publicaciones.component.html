@@ -9,6 +9,7 @@
           </button>
         </div>
         <form >
+          <div id="alertaPublicacion"></div>
           <input type="hidden" name="_id" id="_id" [(ngModel)]="id">
           <div class="modal-body">
             <div class="position-relative form-group">
@@ -16,14 +17,14 @@
                 <input type="text" name="titulo" id="titulo" class="form-control" [(ngModel)]="titulo" placeholder="Título">
             </div>
             <div class="position-relative form-group">
-                <label for="categoria" class="">Categoría</label>
-                <select [(ngModel)]="categoria" name="select" id="categoria" class="form-control">
-                    <option disabled="true" selected >- Seleccione el tipo de publicación -</option>
-                    <option>Educación</option>
-                    <option>Salud</option>
-                    <option>Seguridad</option>
-                    <option>Otro</option>
-                </select>
+              <label for="categoria" class="">Categoría</label>
+              <select [(ngModel)]="categoria" name="select" id="categoria" class="form-control">
+                  <option disabled="true" selected >- Seleccione el tipo de publicación -</option>
+                  <option>Educación</option>
+                  <option>Salud</option>
+                  <option>Seguridad</option>
+                  <option>Otro</option>
+              </select>
             </div>
             <div class="position-relative form-group">
                 <label for="">Descripcion</label>
@@ -75,10 +76,4 @@
             <button class="btn btn-primary">Limpiar</button>
             <button class="btn btn-primary" (click)="addPublicacion()">Publicar</button>
           </div>
-          
-        </form>
-
-      </div>
-    </div>
-  </div>
 

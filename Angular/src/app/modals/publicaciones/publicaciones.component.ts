@@ -14,6 +14,7 @@ export class PublicacionesComponent implements OnInit {
   lat = 24.0277;
   lng = -104.653;
   zoom = 6;
+  draggable = true;
   mapTypeId = 'roadmap';
   located = false;
   limitacionMarcador = 0;
@@ -63,6 +64,8 @@ export class PublicacionesComponent implements OnInit {
     coordsFinales(){
       console.log('LATITUD FINAL: ' + this.lat);
       console.log('LONGITUD FINAL: ' + this.lng);
+      // tslint:disable-next-line: no-unused-expression
+      this.markers[0].draggable = false;
     }
 
   constructor(public publicacionService: PublicacionService) {
@@ -119,14 +122,22 @@ export class PublicacionesComponent implements OnInit {
   }
     // tslint:disable-next-line: typedef
     addPublicacion(){
-      /// aquí vas a poner los datos que no son necesarios tomar desde el modal, pero aun no
-      this.user = 'KEVIN uwu';
+      var alerta = document.getElementById('alertaPublicacion');
+      alerta.innerHTML = '';
+      if(this.markers[0].draggable === false){
+        /// aquí vas a poner los datos que no son necesarios tomar desde el modal, pero aun no
+        this.user = 'KEVIN uwu';
         // tslint:disable-next-line: align
         this.publicacionService.postPublicacion(this.titulo, this.fecha, this.categoria,
         this.descripcion, this.archivos, this.ubicacion, this.denuncias, this.reincidencias, this.user).subscribe(res => {
             console.log(res);
             this.getPublicaciones();
         });
+      }else{
+        alerta.innerHTML = alerta.innerHTML + "<div class='alert alert-danger alert-dismissible fade show' role='alert'>" +
+                            "<strong>Necesita confirmar la ubicación...</strong><button type='button' class='close' data-dismiss='alert' aria-label='Close'>" +
+                            "<span aria-hidden='true'>&times;</span> </button> </div>";
+      }
     }
     // tslint:disable-next-line: typedef
     getPublicaciones() {
@@ -141,6 +152,7 @@ export class PublicacionesComponent implements OnInit {
       this.publicacionService.selectedPublicacion = publicacion;
     }
     // tslint:disable-next-line: typedef
+
     deletePublicacion(_id: string){
       if (confirm('¿Estás seguro que quieres eliminarla?')){
         this.publicacionService.deletePublicacion(_id)
@@ -151,15 +163,7 @@ export class PublicacionesComponent implements OnInit {
         });
       }
     }
-    // tslint:disable-next-line: typedef
-    resetForm(form?: NgForm) {
-      if (form){
-        form.reset();
-        this.publicacionService.selectedPublicacion = new Publicacion();
-      }
-    }
 }
-
 // tslint:disable-next-line: class-name
 interface marker {
   lat: number;
