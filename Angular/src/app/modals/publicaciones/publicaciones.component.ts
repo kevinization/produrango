@@ -85,7 +85,9 @@ export class PublicacionesComponent implements OnInit {
   // tslint:disable-next-line: member-ordering
   archivos: string;
   // tslint:disable-next-line: member-ordering
-  ubicacion: string;
+  latitud: number;
+  
+  longitud: number;
   // tslint:disable-next-line: member-ordering
   denuncias: number;
   // tslint:disable-next-line: member-ordering
@@ -116,7 +118,6 @@ export class PublicacionesComponent implements OnInit {
     this.categoria = this.publicacionService.selectedPublicacion.categoria;
     this.descripcion = this.publicacionService.selectedPublicacion.descripcion;
     this.archivos = this.publicacionService.selectedPublicacion.archivos;
-    this.ubicacion = this.publicacionService.selectedPublicacion.ubicacion;
     this.denuncias = this.publicacionService.selectedPublicacion.denuncias;
     this.reincidencias = this.publicacionService.selectedPublicacion.reincidencias;
   }
@@ -124,13 +125,16 @@ export class PublicacionesComponent implements OnInit {
     addPublicacion(){
       var alerta = document.getElementById('alertaPublicacion');
       alerta.innerHTML = '';
-      if(this.markers[0].draggable === false){
+      if(this.markers[0].draggable === false || this.markers.length === 0){
         /// aquí vas a poner los datos que no son necesarios tomar desde el modal, pero aun no
         this.user = 'KEVIN uwu';
         // tslint:disable-next-line: align
         this.publicacionService.postPublicacion(this.titulo, this.fecha, this.categoria,
-        this.descripcion, this.archivos, this.ubicacion, this.denuncias, this.reincidencias, this.user).subscribe(res => {
+        this.descripcion, this.archivos, (this.lng).toString(), (this.lat).toString(), this.denuncias, this.reincidencias, this.user).subscribe(res => {
             console.log(res);
+            alerta.innerHTML = alerta.innerHTML + "<div class='alert alert-success alert-dismissible fade show' role='alert'>" +
+                            "<strong>Publicación añadida con exito </strong><button type='button' class='close' data-dismiss='alert' aria-label='Close'>" +
+                            "<span aria-hidden='true'>&times;</span> </button> </div>";
             this.getPublicaciones();
         });
       }else{
