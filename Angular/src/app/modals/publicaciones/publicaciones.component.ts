@@ -1,8 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, NgZone } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Publicacion } from 'src/app/models/publicacion';
 import { PublicacionService } from '../../services/publicacion.service';
-import { MouseEvent } from '@agm/core';
+import { MapsAPILoader, MouseEvent } from '@agm/core';
 
 
 @Component({
@@ -11,64 +11,22 @@ import { MouseEvent } from '@agm/core';
   styleUrls: ['./publicaciones.component.css']
 })
 export class PublicacionesComponent implements OnInit {
-  lat = 24.0277;
-  lng = -104.653;
-  zoom = 6;
-  draggable = true;
-  mapTypeId = 'roadmap';
-  located = false;
-  limitacionMarcador = 0;
+  latitude: number;
+  longitude: number;
+  zoom: number;
+  address: string;
+  private geoCoder;
 
-  markers: marker[] = [];
+  @ViewChild('search')
+  public searchElementRef: ElementRef;
 
-  // tslint:disable-next-line: typedef
-  clickedMarker(label: string, index: number) {
-    console.log(`clicked the marker: ${label || index}`);
-  }
 
-  // tslint:disable-next-line: typedef
-  mapClicked($event: MouseEvent) {
-    this.limitacionMarcador ++;
-    if (this.limitacionMarcador === 1){
-      this.markers.push({
-        lat: $event.coords.lat,
-        lng: $event.coords.lng,
-        draggable: true
-      });
-    }
-    console.log('lat del marcador apenas es colocado: ' + this.lat);
-    console.log('lng del marcador apenas es colocado: ' + this.lng);
-  }
 
-  // tslint:disable-next-line: typedef
-  markerDragEnd(m: marker, $event: MouseEvent) {
-    console.log('dragEnd', m, $event);
-    console.log('la latitud es: ' + $event.coords.lat);
-    console.log('la longitud es: ' + $event.coords.lng);
 
-    this.lat = $event.coords.lat;
-    this.lng = $event.coords.lng;
-  }
 
-   // tslint:disable-next-line: typedef
-   obtenerPosicionActual(){
-    // Obtener posición actual
-    navigator.geolocation.getCurrentPosition(position => {
-      this.lat = position.coords.latitude;
-      this.lng = position.coords.longitude;
-      this.zoom = 17;
-    });
-  }
 
-    // tslint:disable-next-line: typedef
-    coordsFinales(){
-      console.log('LATITUD FINAL: ' + this.lat);
-      console.log('LONGITUD FINAL: ' + this.lng);
-      // tslint:disable-next-line: no-unused-expression
-      this.markers[0].draggable = false;
-    }
 
-  constructor(public publicacionService: PublicacionService) {
+  constructor(public publicacionService: PublicacionService, private mapsAPILoader: MapsAPILoader, private ngZone: NgZone ) {
 
    }
 
@@ -86,7 +44,6 @@ export class PublicacionesComponent implements OnInit {
   archivos: string;
   // tslint:disable-next-line: member-ordering
   latitud: number;
-  
   longitud: number;
   // tslint:disable-next-line: member-ordering
   denuncias: number;
@@ -95,12 +52,81 @@ export class PublicacionesComponent implements OnInit {
   // tslint:disable-next-line: member-ordering
   user: string;
 
-  ngOnInit(): void {
+  // tslint:disable-next-line: typedef
+  ngOnInit() {
     this.getPublicaciones();
     this.conectarDatos();
+
+    // load Places Autocomplete
+    this.mapsAPILoader.load().then(() => {
+      this.setCurrentLocation();
+      // tslint:disable-next-line: new-parens
+      this.geoCoder = new google.maps.Geocoder;
+      // tslint:disable-next-line: prefer-const
+      let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement);
+      autocomplete.addListener('place_changed', () => {
+        this.ngZone.run(() => {
+          // get the place result
+          // tslint:disable-next-line: prefer-const
+          let place: google.maps.places.PlaceResult = autocomplete.getPlace();
+          // verify result
+          if (place.geometry === undefined || place.geometry === null) {
+          return;
+          }
+          // set latitude, longitude and zoom
+          this.latitude = place.geometry.location.lat();
+          this.longitude = place.geometry.location.lng();
+          this.zoom = 12;
+        });
+      });
+    });
   }
 
+  // Get Current Location Coordinates
+  // tslint:disable-next-line: typedef
+  private setCurrentLocation() {
+    if ('geolocation' in navigator) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        this.latitude = position.coords.latitude;
+        this.longitude = position.coords.longitude;
+        this.zoom = 8;
+        this.getAddress(this.latitude, this.longitude);
+      });
+    }
+  }
 
+  // tslint:disable-next-line: typedef
+  markerDragEnd($event: MouseEvent) {
+    console.log($event);
+    this.latitude = $event.coords.lat;
+    this.longitude = $event.coords.lng;
+    this.getAddress(this.latitude, this.longitude);
+  }
+
+  // tslint:disable-next-line: typedef
+  getAddress(latitude, longitude) {
+    // tslint:disable-next-line: object-literal-key-quotes
+    this.geoCoder.geocode({ 'location': { lat: latitude, lng: longitude } }, (results, status) => {
+      console.log(results);
+      console.log(status);
+      if (status === 'OK') {
+        if (results[0]) {
+          this.zoom = 12;
+          this.address = results[0].formatted_address;
+        } else {
+            window.alert('No results found');
+          }
+      } else {
+          window.alert('Geocoder failed due to: ' + status);
+        }
+    });
+  }
+
+  // tslint:disable-next-line: typedef
+  obtenerCoords(){
+    console.log('La latitud es: ' + this.latitude);
+    console.log('La longitud es: ' + this.longitude);
+  }
 
 
 
@@ -125,7 +151,7 @@ export class PublicacionesComponent implements OnInit {
     addPublicacion(){
       var alerta = document.getElementById('alertaPublicacion');
       alerta.innerHTML = '';
-      if(this.markers[0].draggable === false || this.markers.length === 0){
+/*       if(this.markers[0].draggable === false || this.markers.length === 0){
         /// aquí vas a poner los datos que no son necesarios tomar desde el modal, pero aun no
         this.user = 'KEVIN uwu';
         // tslint:disable-next-line: align
@@ -141,7 +167,7 @@ export class PublicacionesComponent implements OnInit {
         alerta.innerHTML = alerta.innerHTML + "<div class='alert alert-danger alert-dismissible fade show' role='alert'>" +
                             "<strong>Necesita confirmar la ubicación...</strong><button type='button' class='close' data-dismiss='alert' aria-label='Close'>" +
                             "<span aria-hidden='true'>&times;</span> </button> </div>";
-      }
+      } */
     }
     // tslint:disable-next-line: typedef
     getPublicaciones() {
@@ -157,6 +183,7 @@ export class PublicacionesComponent implements OnInit {
     }
     // tslint:disable-next-line: typedef
 
+    // tslint:disable-next-line: typedef
     deletePublicacion(_id: string){
       if (confirm('¿Estás seguro que quieres eliminarla?')){
         this.publicacionService.deletePublicacion(_id)
@@ -168,10 +195,4 @@ export class PublicacionesComponent implements OnInit {
       }
     }
 }
-// tslint:disable-next-line: class-name
-interface marker {
-  lat: number;
-  lng: number;
-  label?: string;
-  draggable: boolean;
-}
+

@@ -44,7 +44,8 @@ import { AgmCoreModule } from '@agm/core';
     NgbModule,
     SocialLoginModule,
     AgmCoreModule.forRoot({
-      apiKey: ''
+      apiKey: 'AIzaSyDAZkJAbosyGy9hvprE-NdZgVVVALUZDyU',
+      libraries: ['places']
     })
   ],
   providers: [
