@@ -30,6 +30,9 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  ngAfterContentChecked(): void {
+  }
+
 
   signInWithGoogle(): void {
     this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
@@ -43,18 +46,17 @@ export class LoginComponent implements OnInit {
 
   signOut(): void {
     this.authService.signOut();
-    /*this.dataService.inactiveUser(this.AT).subscribe((resultado) => {
+    this.dataService.inactiveUser(this.AT).subscribe((resultado) => {
       console.log(resultado);
     }, (err) => {
       console.log(err);
-    });*/
+    });
   }
 
   sign(){
     this.authService.authState.subscribe((user) => {
       this.user = user;
       this.provider = this.user.provider;
-      this.AT = this.user.authToken;
       this.email = this.user.email;
       this.name = this.user.name;
       this.foto = this.user.photoUrl;
@@ -65,7 +67,8 @@ export class LoginComponent implements OnInit {
         AppComponent.email = this.email;
         AppComponent.foto = this.foto;
         AppComponent.provider = this. provider;
-        this.dataService.activeUser(this.provider, this.email).subscribe((res) => {
+        this.AT = this.provider + '*' + this.email;
+        this.dataService.activeUser(this.AT).subscribe((res) => {
           AppComponent.AT = this.AT;
           console.log(res);
         }, (err) => {console.log(err); });
@@ -74,7 +77,7 @@ export class LoginComponent implements OnInit {
   }
 
   activeSession(){
-    this.dataService.activeUser(this.provider, this.email).subscribe((res) => {
+    this.dataService.activeUser(this.provider).subscribe((res) => {
       console.log('este es el res: ' + res);
     });
   }

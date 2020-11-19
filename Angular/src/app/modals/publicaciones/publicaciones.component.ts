@@ -15,21 +15,15 @@ export class PublicacionesComponent implements OnInit {
   longitude: number;
   zoom: number;
   address: string;
+  lng: string;
+  lat: string;
   private geoCoder;
+  draggable: boolean = true;
 
   @ViewChild('search')
   public searchElementRef: ElementRef;
 
-
-
-
-
-
-
-  constructor(public publicacionService: PublicacionService, private mapsAPILoader: MapsAPILoader, private ngZone: NgZone ) {
-
-   }
-
+  constructor(public publicacionService: PublicacionService, private mapsAPILoader: MapsAPILoader, private ngZone: NgZone ) {}
   // tslint:disable-next-line: member-ordering
   id: string;
   // tslint:disable-next-line: member-ordering
@@ -43,15 +37,12 @@ export class PublicacionesComponent implements OnInit {
   // tslint:disable-next-line: member-ordering
   archivos: string;
   // tslint:disable-next-line: member-ordering
-  latitud: number;
-  longitud: number;
   // tslint:disable-next-line: member-ordering
   denuncias: number;
   // tslint:disable-next-line: member-ordering
   reincidencias: number;
   // tslint:disable-next-line: member-ordering
   user: string;
-
   // tslint:disable-next-line: typedef
   ngOnInit() {
     this.getPublicaciones();
@@ -123,18 +114,13 @@ export class PublicacionesComponent implements OnInit {
   }
 
   // tslint:disable-next-line: typedef
-  obtenerCoords(){
+  confirmarDireccion(){
     console.log('La latitud es: ' + this.latitude);
     console.log('La longitud es: ' + this.longitude);
+    console.log('Draggable es: ' + this.draggable);
+    this.draggable = false;
+    console.log('Como ya pulsé el botón, ahora draggable es: ' + this.draggable);
   }
-
-
-
-
-
-
-
-
 
   // tslint:disable-next-line: typedef
   conectarDatos(){
@@ -146,28 +132,35 @@ export class PublicacionesComponent implements OnInit {
     this.archivos = this.publicacionService.selectedPublicacion.archivos;
     this.denuncias = this.publicacionService.selectedPublicacion.denuncias;
     this.reincidencias = this.publicacionService.selectedPublicacion.reincidencias;
+    this.latitude = (this.publicacionService.selectedPublicacion.latitud);
+    this.longitude = this.publicacionService.selectedPublicacion.longitud;
   }
+
+
     // tslint:disable-next-line: typedef
     addPublicacion(){
       var alerta = document.getElementById('alertaPublicacion');
       alerta.innerHTML = '';
-/*       if(this.markers[0].draggable === false || this.markers.length === 0){
+       if(this.draggable === false){
         /// aquí vas a poner los datos que no son necesarios tomar desde el modal, pero aun no
+        this.lat = (this.latitude).toString();
+        this.lng = (this.longitude).toString();
         this.user = 'KEVIN uwu';
         // tslint:disable-next-line: align
         this.publicacionService.postPublicacion(this.titulo, this.fecha, this.categoria,
-        this.descripcion, this.archivos, (this.lng).toString(), (this.lat).toString(), this.denuncias, this.reincidencias, this.user).subscribe(res => {
+        this.descripcion, this.archivos, this.latitude, this.longitude, this.denuncias,
+        this.reincidencias, this.user).subscribe(res => {
             console.log(res);
-            alerta.innerHTML = alerta.innerHTML + "<div class='alert alert-success alert-dismissible fade show' role='alert'>" +
-                            "<strong>Publicación añadida con exito </strong><button type='button' class='close' data-dismiss='alert' aria-label='Close'>" +
-                            "<span aria-hidden='true'>&times;</span> </button> </div>";
+            alerta.innerHTML = alerta.innerHTML + '<div class=\'alert alert-success alert-dismissible fade show\' role=\'alert\'>' +
+                            '<strong>Publicación añadida con exito </strong><button type=\'button\' class=\'close\' data-dismiss=\'alert\' aria-label=\'Close\'>' +
+                            '<span aria-hidden=\'true\'>&times;</span> </button> </div>';
             this.getPublicaciones();
         });
       }else{
-        alerta.innerHTML = alerta.innerHTML + "<div class='alert alert-danger alert-dismissible fade show' role='alert'>" +
-                            "<strong>Necesita confirmar la ubicación...</strong><button type='button' class='close' data-dismiss='alert' aria-label='Close'>" +
-                            "<span aria-hidden='true'>&times;</span> </button> </div>";
-      } */
+        alerta.innerHTML = alerta.innerHTML + '<div class=\'alert alert-danger alert-dismissible fade show\' role=\'alert\'>' +
+                            '<strong>Necesita confirmar la ubicación...</strong><button type=\'button\' class=\'close\' data-dismiss=\'alert\' aria-label=\'Close\'>' +
+                            '<span aria-hidden=\'true\'>&times;</span> </button> </div>';
+      } 
     }
     // tslint:disable-next-line: typedef
     getPublicaciones() {

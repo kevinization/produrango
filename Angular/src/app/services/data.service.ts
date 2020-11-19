@@ -21,12 +21,20 @@ export class DataService {
     return this._client.post(this.URL_API, newData);
   }
 
-  activeUser( prvd: string, correo: string){
+  activeUser( prvd: string){
     let newAuth = {
       provider: prvd,
-      email: correo
+      log: true
     };
     return this._client.post(this.URLLOG, newAuth);
+  }
+
+  inactiveUser( provider: string){
+    let A ={
+      provider: provider,
+      log: false
+    }
+    return this._client.put('http://localhost:3000/api/activos/' + provider , A);
   }
 
   searchUser( aT: string){
@@ -38,6 +46,8 @@ export class DataService {
     let _authT = aT;
     return this._client.get(this.URL_API + _authT);
   }
+
+  // Falta crear las rutas
 
 
 

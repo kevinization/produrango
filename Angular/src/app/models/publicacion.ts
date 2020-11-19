@@ -5,8 +5,8 @@ export class Publicacion {
     categoria: string;
     descripcion: string;
     archivos: string;
-    latitud: string;
-    longitud: string;
+    latitud: number;
+    longitud: number;
     denuncias: number;
     reincidencias: number;
     confirmacion_reincidencias: boolean;
@@ -14,7 +14,7 @@ export class Publicacion {
     nombre_usuario: string;
 
     constructor(_id = '', titulo = '', fecha = '', categoria = '', descripcion = '', archivos = '',
-                latitud = '', longitud = '', denuncias = 0, reincidencias = 0, confirmacion_reincidencias = false,
+                latitud = 0, longitud =0, denuncias = 0, reincidencias = 0, confirmacion_reincidencias = false,
                 contenido_comentario = '', nombre_usuario = '' ){
         this._id = _id;
         this.titulo = titulo;

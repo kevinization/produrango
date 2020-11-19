@@ -25,7 +25,7 @@ export class PublicacionService {
   }
 
   postPublicacion(tit: string, fe: string, cat: string, des: string,
-                  arch: string, lng: string, lat: string, den: number, rein: number, username: string){
+                  arch: string, lng: number, lat: number, den: number, rein: number, username: string){
     let newPublicacion = {
       titulo : tit,
       fecha: fe,

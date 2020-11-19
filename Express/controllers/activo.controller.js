@@ -7,31 +7,34 @@ activoCtrl.getActivos = async (req, res) => {
     res.json(activos);
 };
 
-activoCtrl.getA = async (req, res) => {
-    if((req.body.email) !== undefined || (req.body.provider) !== undefined ){
-        const activos = await Activo.findOne({provider: req.body.provider, email: req.body.email}).exec((error, user) => {
-            if(!error){
-                if(user != null){
-                    res.json(user);
-                }
-            }
-            else{
-                res.status(500).json(error);
-            }
+activoCtrl.setFalse = async (req, res) => {
+    try{
+        const active = {
+            provider: req.body.provider,
+            log: req.body.log
+        }
+        console.log(active);
+        await Activo.findOneAndUpdate(req.params.provider, {$set: active}, {new: true});
+        res.json({
+            'status': 'usuario cerro sesión'
+        });
+    }catch(e){
+        res.json({
+            'status': 'FFFFff'
         });
     }
 };
 
 activoCtrl.createActivo = async (req, res) => {
-    if(req.body.provider != undefined && req.body.email != undefined){
+    if(req.body.provider != undefined && req.body.log != undefined){
         const activo = new Activo ({
             provider: req.body.provider,
-            email: req.body.email
+            log: req.body.log
         });
 
         console.log(activo);
     
-        Activo.findOne({provider: req.body.provider, email: req.body.email}, function (err, user){
+        Activo.findOne({provider: req.body.provider, log: req.body.log}, function (err, user){
             if(user == null){
                 activo.save();
             }

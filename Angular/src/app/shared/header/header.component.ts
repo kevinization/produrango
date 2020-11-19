@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RouterModule, Router, NavigationEnd } from '@angular/router';
 import { AppComponent } from 'src/app/app.component';
 import { DataService } from '../../services/data.service';
+import { SocialAuthService, SocialUser } from 'angularx-social-login';
 
 @Component({
   selector: 'app-header',
@@ -11,7 +12,7 @@ import { DataService } from '../../services/data.service';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private router: Router, private dataService: DataService) { }
+  constructor(private router: Router, private dataService: DataService, private authService: SocialAuthService) { }
 
   AT: string;
   logged: boolean;
@@ -64,6 +65,17 @@ export class HeaderComponent implements OnInit {
         this.email = AppComponent.email;
         this.foto = AppComponent.foto;
       }
+  }
+
+  signOut(): void {
+    this.AT = AppComponent.AT;
+    console.log(this.AT);
+    this.dataService.inactiveUser(this.AT).subscribe((resultado) => {
+      console.log(resultado);
+      this.authService.signOut();
+    }, (err) => {
+      console.log(err);
+    });
   }
 
 }

@@ -32,7 +32,12 @@
             </div>
             <div class="position-relative form-group">
                 <label for="">Archivos</label>
-                <input type="text" name="archivos" id="archivos" class="form-control" [(ngModel)]="archivos" placeholder="Opcional">
+                <div class="input-group mb-3">
+                  <div class="custom-file">
+                    <input type="file" name="archivos" class="custom-file-input" id="archivos" [(ngModel)]="archivos" aria-describedby="archivosAddon" placeholder="Opcional">
+                    <label class="custom-file-label" for="archivos">Browse</label>
+                  </div>
+                </div>
             </div>
             <div class="position-relative form-group d-flex justify-content-center">
 
@@ -45,7 +50,7 @@
                 </div>
 
                 <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">
-                  <agm-marker [latitude]="latitude" [longitude]="longitude" [markerDraggable]="true"
+                  <agm-marker [latitude]="latitude" [longitude]="longitude" [markerDraggable]="draggable"
                     (dragEnd)="markerDragEnd($event)"></agm-marker>
                 </agm-map>
 
@@ -54,7 +59,7 @@
                 <div>Longitud: {{longitude}}</div>
 
                 <div class="card-body">
-                  <button (click)="obtenerCoords()" class="btn btn-primary  d-flex justify-content-center">Obtener dirección</button>
+                  <button (click)="confirmarDireccion()" class="btn btn-primary  d-flex justify-content-center">Confirmar dirección</button>
                 </div>
                 
               </div>

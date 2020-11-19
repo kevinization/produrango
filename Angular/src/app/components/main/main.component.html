@@ -34,6 +34,14 @@
             <span>{{publicacion.denuncias}}</span>
             <a (onClick)="aumentarDen(publicacion.denuncias)"><i class="fa fa-bullhorn"></i></a>
         </div>
+          <agm-map [latitude]="publicacion.latitud" [longitude]="publicacion.longitud" [zoom]="zoom">
+            <agm-marker [latitude]=publicacion.latitud [longitude]=publicacion.longitud [label]="" [markerDraggable]="false">
+              <agm-info-window> <!-- Es la información que sale al darle click al marcador -->
+                <h3>{{publicacion.titulo}}</h3>
+                <span>{{publicacion.descripcion}}</span>
+              </agm-info-window>
+            </agm-marker>
+          </agm-map>
       </div>
   </div>
 </div>

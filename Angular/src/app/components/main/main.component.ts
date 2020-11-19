@@ -5,6 +5,7 @@ import { AppComponent } from 'src/app/app.component';
 
 import { PublicacionService } from '../../services/publicacion.service';
 import { ExampleService } from '../../services/example.service';
+import { keyframes } from '@angular/animations';
 
 @Component({
   selector: 'app-main',
@@ -15,6 +16,9 @@ import { ExampleService } from '../../services/example.service';
 export class MainComponent implements OnInit {
   logged: boolean;
   private _username = "";
+
+  zoom = 6;
+
   public get username() {
     return this._username;
   }
@@ -32,7 +36,6 @@ export class MainComponent implements OnInit {
     this.publicacionService.getPublicaciones()
       .subscribe(res => {
         this.publicacionService.publicaciones = res as Publicacion[];
-        console.log(res);
       });
   }
 
@@ -46,6 +49,7 @@ export class MainComponent implements OnInit {
   aumentarDen(den: number){
     den = den + 1;
   }
+
     // tslint:disable-next-line: typedef
     /*/getUsuarios() {
       this.publicacionService.getExamples()
@@ -56,3 +60,4 @@ export class MainComponent implements OnInit {
     }*/
 
 }
+

@@ -4,7 +4,8 @@ const router = express.Router();
 const activo = require('../controllers/activo.controller');
 
 router.get('/', activo.getActivos);
-router.get('/:authT', activo.getA);
+router.put('/:provider', activo.setFalse);
+//router.get('/:provider', activo.setFalse);
 router.post('/', activo.createActivo);
 
 module.exports = router;
