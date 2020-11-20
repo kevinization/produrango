@@ -1,4 +1,5 @@
 import { Component} from '@angular/core';
+import { DataService } from './services/data.service';
 
 @Component({
   selector: 'app-root',
@@ -54,7 +55,7 @@ export class AppComponent{
   static set provider(value: string) {
     AppComponent._provider = value;
   }
-  static _provider: string = '';
+  static _provider: string = "GOOGLE*kevin.rodarte.is@unipolidgo.edu.mx";
 
   logged: boolean = AppComponent.logged;
 
@@ -65,13 +66,14 @@ export class AppComponent{
     mapTypeId: string;
     located: boolean;
 
-    constructor(){
-      navigator.geolocation.getCurrentPosition(position => {
-        this.lat = position.coords.latitude;
-        this.lng = position.coords.longitude;
-        this.zoom = 17;
-        // located se pone en true al presionar el botón para obtener la posición actual para que el marcador aparezca
-        this.located = true;
-      });
+    constructor(dataService: DataService){
+      debugger
+      if (AppComponent.provider != null || AppComponent.provider != ''){
+        dataService.searchUser(AppComponent.provider).subscribe((res) => {
+          console.log(res);
+        }, (e) =>{
+          console.log(e);
+        });
+      }
     }
 }

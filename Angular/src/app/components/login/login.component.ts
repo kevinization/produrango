@@ -28,11 +28,18 @@ export class LoginComponent implements OnInit {
       console.log(user);
       this.loggedIn = (user != null);
     });
+
   }
+
 
   ngAfterContentChecked(): void {
+    if (AppComponent.logged === true) {
+      this.name = AppComponent.user;
+      this.email = AppComponent.email;
+      this.foto = AppComponent.foto;
+      this.provider = AppComponent.provider;
+    }
   }
-
 
   signInWithGoogle(): void {
     this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
@@ -46,7 +53,8 @@ export class LoginComponent implements OnInit {
 
   signOut(): void {
     this.authService.signOut();
-    this.dataService.inactiveUser(this.AT).subscribe((resultado) => {
+    this.dataService.inactiveUser(this.provider).subscribe((resultado) => {
+      AppComponent.logged = false;
       console.log(resultado);
     }, (err) => {
       console.log(err);
@@ -67,19 +75,11 @@ export class LoginComponent implements OnInit {
         AppComponent.logged = true;
         AppComponent.email = this.email;
         AppComponent.foto = this.foto;
-        AppComponent.provider = this. provider;
-        this.AT = this.provider + '*' + this.email;
-        this.dataService.activeUser(this.AT).subscribe((res) => {
-          AppComponent.AT = this.AT;
+        this.dataService.activeUser(this.provider).subscribe((res) => {
+          AppComponent.provider = this. provider;
           console.log(res);
         }, (err) => {console.log(err); });
       }, (error) => {console.log(error); });
-    });
-  }
-
-  activeSession(){
-    this.dataService.activeUser(this.provider).subscribe((res) => {
-      // Nos quedamos editando este
     });
   }
 

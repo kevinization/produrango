@@ -26,7 +26,18 @@ activoCtrl.setFalse = async (req, res) => {
 };
 
 activoCtrl.searchActivo = async (req, res) => {
-    //Activo.findOne({provider: }) // Nos queamos editando este
+    await Activo.findOne({provider: req.params.provider, log:true}, function (e, admin){
+        if( !e){
+            console.log('algo');
+            // --- Aquí nos quedamos --- REVISAR
+            res.json(admin);
+        }else{
+            console.log('F no sirve');
+            res.json({
+                'status': ':c'
+            });
+        }
+    });
 };
 
 activoCtrl.createActivo = async (req, res) => {

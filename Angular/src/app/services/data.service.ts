@@ -37,9 +37,8 @@ export class DataService {
     return this._client.put('http://localhost:3000/api/activos/' + provider , A);
   }
 
-  searchUser( aT: string){
-    let _authT = aT;
-    return this._client.get(this.URLLOG + _authT);
+  searchUser( provider: string){
+    return this._client.get('http://localhost:3000/api/activos/' + provider);
   }
 
   searchData(aT: string){
