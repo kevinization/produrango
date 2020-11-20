@@ -25,6 +25,10 @@ activoCtrl.setFalse = async (req, res) => {
     }
 };
 
+activoCtrl.searchActivo = async (req, res) => {
+    //Activo.findOne({provider: }) // Nos queamos editando este
+};
+
 activoCtrl.createActivo = async (req, res) => {
     if(req.body.provider != undefined && req.body.log != undefined){
         const activo = new Activo ({
@@ -40,7 +44,7 @@ activoCtrl.createActivo = async (req, res) => {
             }
             else{
                 res.json({
-                    'status': 'usuario logueado'
+                    'status': 'usuario logueado' // Nos quedamos editando este
                 });
             }
         });

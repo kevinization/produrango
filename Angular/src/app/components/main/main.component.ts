@@ -16,8 +16,13 @@ import { keyframes } from '@angular/animations';
 export class MainComponent implements OnInit {
   logged: boolean;
   private _username = "";
-
+  lt: number = 0;
+  lg: number = 0;
   zoom = 6;
+  u: number =-104.66528353442382;
+  v: number = 24.0094042544207;
+  f: boolean;
+  markers: marker[] = [];
 
   public get username() {
     return this._username;
@@ -28,11 +33,28 @@ export class MainComponent implements OnInit {
   constructor(public publicacionService: PublicacionService, exampleService: ExampleService) { }
 
   ngOnInit(): void {
+    this.f = false;
     this.logged = AppComponent.logged;
     this.getPublicaciones();
   }
   // tslint:disable-next-line: typedef
   getPublicaciones() {
+    this.publicacionService.getPublicaciones()
+      .subscribe(res => {
+        for (let i= 0; i < Object.keys(res).length; i++){
+          this.markers.push({
+            lat: Number(res[i].latitud),
+            lng: Number(res[i].longitud),
+            draggable: false
+          });
+        }
+
+        console.log(this.markers);
+        this.publicacionService.publicaciones = res as Publicacion[];
+      });
+  }
+
+  getPublicaciones2() {
     this.publicacionService.getPublicaciones()
       .subscribe(res => {
         this.publicacionService.publicaciones = res as Publicacion[];
@@ -59,5 +81,12 @@ export class MainComponent implements OnInit {
         });
     }*/
 
+}
+
+interface marker {
+  lat: number;
+  lng: number;
+  label?: string;
+  draggable: boolean;
 }
 

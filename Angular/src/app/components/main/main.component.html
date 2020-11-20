@@ -7,7 +7,7 @@
     </div> 
   </div>
   <br>
-  <div *ngFor="let publicacion of publicacionService.publicaciones" class="row">
+  <div *ngFor="let publicacion of publicacionService.publicaciones; let i=index" class="row">
       <div class="card col-10 offset-1 imgs" >
         <div class="container">
           <div class="d-flex justify-content-between align-items-center">
@@ -34,8 +34,9 @@
             <span>{{publicacion.denuncias}}</span>
             <a (onClick)="aumentarDen(publicacion.denuncias)"><i class="fa fa-bullhorn"></i></a>
         </div>
-          <agm-map [latitude]="publicacion.latitud" [longitude]="publicacion.longitud" [zoom]="zoom">
-            <agm-marker [latitude]=publicacion.latitud [longitude]=publicacion.longitud [label]="" [markerDraggable]="false">
+        <span>{{markers[i].lat}},   {{markers[i].lat}}</span>
+          <agm-map [latitude]=markers[i].lat [longitude]=markers[i].lng [zoom]="zoom">
+            <agm-marker [latitude]=markers[i].lat [longitude]=markers[i].lng [label]="" [markerDraggable]="false">
               <agm-info-window> <!-- Es la información que sale al darle click al marcador -->
                 <h3>{{publicacion.titulo}}</h3>
                 <span>{{publicacion.descripcion}}</span>

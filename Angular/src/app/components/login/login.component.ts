@@ -60,6 +60,7 @@ export class LoginComponent implements OnInit {
       this.email = this.user.email;
       this.name = this.user.name;
       this.foto = this.user.photoUrl;
+      this.provider = this.provider + '*' + this.email;
       this.dataService.authUser(this.provider, this.email, this.name, this.foto).subscribe((resultado) => {
         console.log(resultado);
         AppComponent.user = this.name;
@@ -78,7 +79,7 @@ export class LoginComponent implements OnInit {
 
   activeSession(){
     this.dataService.activeUser(this.provider).subscribe((res) => {
-      console.log('este es el res: ' + res);
+      // Nos quedamos editando este
     });
   }
 
