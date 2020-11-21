@@ -16,7 +16,9 @@
               <a href="#" class="btn btn-primary btn-sm dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               </a>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item" href="#"><i class="fas fa-share-square"></i>  Compartir</a>
+                <a href="https://www.facebook.com/sharer/sharer.php?u=www.produrango.mx/{{publicacion._id}}" target="_blank" onclick="window.open(this.href, this.target, 'width=526,height=800'); return false;" class="dropdown-item"> <i class="fab fa-facebook"></i> Compartir en Facebook</a>
+                <a href="https://api.whatsapp.com/send?text={{publicacion.titulo}}%20www.produrango.mx/{{publicacion._id}}" target="_blank" onclick="window.open(this.href, this.target, 'width=700,height=800'); return false;" class="dropdown-item"> <i class="fab fa-whatsapp-square"></i> Compartir en WhatsApp</a>
+                <a href="https://twitter.com/intent/tweet?text={{publicacion.titulo}}&url=www.produrango.mx/{{publicacion._id}}&hashtags=PRODurango"target="_blank" onclick="window.open(this.href, this.target, 'width=700,height=800'); return false;" class="dropdown-item"> <i class="fab fa-twitter-square"></i> Compartir en Twitter</a>
               </div>
             </div>
 
