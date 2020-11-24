@@ -43,12 +43,7 @@ publicacionCtrl.editPublicacion = async (req, res) => {
         descripcion: req.body.descripcion,
         archivos: req.body.archivos,
         latitud: req.body.latitud,
-        longitud: req.body.longitud,
-        denuncias: req.body.denuncias,
-        reincidencias: req.body.reincidencias,
-        confirmacion_reincidencias: req.body.confirmacion_reincidencias,
-        contenido_comentario: req.body.contenido_comentario,
-        nombre_usuario: req.body.nombre_usuario
+        longitud: req.body.longitud
     };
     await Publicacion.findByIdAndUpdate(req.params.id, {$set: publicacion}, {new: true});
     res.json({

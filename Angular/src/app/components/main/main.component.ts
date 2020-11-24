@@ -24,6 +24,69 @@ export class MainComponent implements OnInit {
   f: boolean;
   markers: marker[] = [];
 
+  private static _id: string = '';
+  static get id(): string {
+    return MainComponent._id;
+  }
+  static set id(value: string) {
+    MainComponent._id = value;
+  }
+
+  private static _titulo: string = '';
+  static get titulo(): string {
+    return MainComponent._titulo;
+  }
+  static set titulo(value: string) {
+    MainComponent._titulo = value;
+  }
+  private static _categoria: string = '';
+  static get categoria(): string {
+    return MainComponent._categoria;
+  }
+  static set categoria(value: string) {
+    MainComponent._categoria = value;
+  }
+
+  private static _descripcion: string = '';
+  static get descripcion(): string {
+    return MainComponent._descripcion;
+  }
+  static set descripcion(value: string) {
+    MainComponent._descripcion = value;
+  }
+
+  private static _archivos: string = '';
+  static get archivos(): string {
+    return MainComponent._archivos;
+  }
+  static set archivos(value: string) {
+    MainComponent._archivos = value;
+  }
+
+  private static _latitud: number = null;
+  static get latitud(): number {
+    return MainComponent._latitud;
+  }
+  static set latitud(value: number) {
+    MainComponent._latitud = value;
+  }
+
+  private static _longitud: number = null;
+  static get longitud(): number {
+    return MainComponent._longitud;
+  }
+  static set longitud(value: number) {
+    MainComponent._longitud = value;
+  }
+
+  private static _flag: boolean = false;
+  static get flag(): boolean {
+    return MainComponent._flag;
+  }
+  static set flag(value: boolean) {
+    MainComponent._flag = value;
+  }
+
   public get username() {
     return this._username;
   }
@@ -52,22 +115,20 @@ export class MainComponent implements OnInit {
         this.publicacionService.publicaciones = res as Publicacion[];
       });
   }
-  obtenerDatos(titulo: string, descripcion: string, categoria: string, archivos: string, latitud: number, longitud: number){
-    console.log(titulo, descripcion, categoria, archivos, latitud, longitud);
-    // tslint:disable-next-line: no-unused-expression
-    this.publicacionService.selectedPublicacion.titulo;
-     // tslint:disable-next-line: no-unused-expression
-    this.publicacionService.selectedPublicacion.descripcion;
-     // tslint:disable-next-line: no-unused-expression
-    this.publicacionService.selectedPublicacion.categoria;
-     // tslint:disable-next-line: no-unused-expression
-    this.publicacionService.selectedPublicacion.archivos;
-     // tslint:disable-next-line: no-unused-expression
-    this.publicacionService.selectedPublicacion.latitud;
-     // tslint:disable-next-line: no-unused-expression
-    this.publicacionService.selectedPublicacion.longitud;
+  
+  obtenerDatos(id: string, titulo: string, descripcion: string, categoria: string, archivos: string, latitud: number, longitud: number){
+    MainComponent.id = id;
+    MainComponent.titulo = titulo;
+    MainComponent.descripcion = descripcion;
+    MainComponent.categoria = categoria;
+    MainComponent.archivos = archivos;
+    MainComponent.latitud = latitud;
+    MainComponent.longitud = longitud;
+    MainComponent.flag = true;
   }
-
+  obtenerId(id: string){
+    MainComponent.id = id;
+  }
   getPublicaciones2() {
     this.publicacionService.getPublicaciones()
       .subscribe(res => {

@@ -48,8 +48,18 @@ export class PublicacionService {
     //return this.http.put(this.URL_API + `/${_id}`, _id );
   }
 
-  putPublicacion(publicacion: Publicacion){
-    return this.http.put(this.URL_API + `/${publicacion._id}`, publicacion);
+  putPublicacion(ID: string, tit: string, fe: string, cat: string, des: string,
+    arch: string, lng: number, lat: number){
+    let updPublicacion = {
+      titulo: tit,
+      fecha: fe,
+      categroia: cat,
+      descripcion: des,
+      archivos: arch,
+      longitud: lng,
+      latitud: lat
+    }
+    return this.http.put(this.URL_API + '/' + ID, updPublicacion);
   }
 
   deletePublicacion(_id: string){

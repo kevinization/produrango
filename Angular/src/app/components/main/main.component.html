@@ -14,7 +14,8 @@
                 <a href="https://www.facebook.com/sharer/sharer.php?u=www.produrango.mx/{{publicacion._id}}" target="_blank" onclick="window.open(this.href, this.target, 'width=526,height=800'); return false;" class="dropdown-item"> <i class="fab fa-facebook"></i> Compartir en Facebook</a>
                 <a href="https://api.whatsapp.com/send?text={{publicacion.titulo}}%20www.produrango.mx/{{publicacion._id}}" target="_blank" onclick="window.open(this.href, this.target, 'width=700,height=800'); return false;" class="dropdown-item"> <i class="fab fa-whatsapp-square"></i> Compartir en WhatsApp</a>
                 <a href="https://twitter.com/intent/tweet?text={{publicacion.titulo}}&url=www.produrango.mx/{{publicacion._id}}&hashtags=PRODurango"target="_blank" onclick="window.open(this.href, this.target, 'width=700,height=800'); return false;" class="dropdown-item"> <i class="fab fa-twitter-square"></i> Compartir en Twitter</a>
-                <button type="button" class="dropdown-item" data-toggle="modal" (click)="obtenerDatos(publicacion.titulo,publicacion.descripcion, publicacion.categoria, publicacion.archivos, publicacion.latitud,publicacion.longitud)" data-target="#modalEditarPublicaciones">Editar <i class="fa fa-edit"></i></button>
+                <button type="button" class="dropdown-item" data-toggle="modal" (click)="obtenerDatos(publicacion._id,publicacion.titulo,publicacion.descripcion, publicacion.categoria, publicacion.archivos, publicacion.latitud,publicacion.longitud)" data-target="#modalEditarPublicaciones">Editar <i class="fas fa-edit"></i></button>
+                <a class="dropdown-item" data-target="#myModal" data-toggle="modal" (click)="obtenerId(publicacion._id)">Eliminar <i class="fas fa-trash"></i></a>
               </div>
             </div>
 					</div>
@@ -44,4 +45,4 @@
         </div>
       </div>
   </div>
-
+    

@@ -4,7 +4,7 @@ import { Publicacion } from 'src/app/models/publicacion';
 import { PublicacionService } from '../../services/publicacion.service';
 import { MapsAPILoader, MouseEvent } from '@agm/core';
 import { AppComponent } from 'src/app/app.component';
-
+import { MainComponent } from '../../components/main/main.component';
 
 @Component({
   selector: 'app-publicaciones',
@@ -19,6 +19,7 @@ export class PublicacionesComponent implements OnInit {
   lng: string;
   lat: string;
   private geoCoder;
+  flag: boolean;
   draggable: boolean = true;
 
   @ViewChild('search')
@@ -173,36 +174,36 @@ export class PublicacionesComponent implements OnInit {
           console.log(res);
         });
     }
-    // tslint:disable-next-line: typedef
-    editPublicacion(publicacion: Publicacion) {
-      this.publicacionService.selectedPublicacion = publicacion;
+    updatePublicacion(){
+      console.log(this.id);
+      this.publicacionService.putPublicacion(this.id, this.titulo, this.fecha, this.categoria,
+        this.descripcion, this.archivos, this.latitude, this.longitude).subscribe(res =>{
+          console.log(res);
+        });
     }
-    // tslint:disable-next-line: typedef
 
     // tslint:disable-next-line: typedef
-    deletePublicacion(_id: string){
-      if (confirm('¿Estás seguro que quieres eliminarla?')){
-        this.publicacionService.deletePublicacion(_id)
+    deletePublicacion(){
+      this.id = MainComponent.id;
+      this.publicacionService.deletePublicacion(this.id)
           .subscribe(res => {
             console.log(res);
             this.getPublicaciones();
             // Publicacion eliminada satisfactoriamente
-        });
+      });
+    }
+    ngAfterContentChecked(): void {
+      this.flag = MainComponent.flag;
+      if (this.flag === true) {
+        this.id = MainComponent.id;
+        this.titulo = MainComponent.titulo;
+        this.descripcion = MainComponent.descripcion;
+        this.categoria = MainComponent.categoria;
+        this.archivos = MainComponent.archivos;
+        this.latitude = MainComponent.latitud;
+        this.longitude = MainComponent.longitud;
+        MainComponent.flag = false;
       }
     }
-    /*ngAfterContentChecked(): void {
-      // tslint:disable-next-line: no-unused-expression
-      this.titulo = this.publicacionService.selectedPublicacion.titulo;
-      // tslint:disable-next-line: no-unused-expression
-      this.descripcion = this.publicacionService.selectedPublicacion.descripcion;
-        // tslint:disable-next-line: no-unused-expression
-      this.categoria = this.publicacionService.selectedPublicacion.categoria;
-        // tslint:disable-next-line: no-unused-expression
-      this.archivos = this.publicacionService.selectedPublicacion.archivos;
-        // tslint:disable-next-line: no-unused-expression
-      this.latitude = this.publicacionService.selectedPublicacion.latitud;
-        // tslint:disable-next-line: no-unused-expression
-      this.longitude = this.publicacionService.selectedPublicacion.longitud;
-    }*/
 }
 
