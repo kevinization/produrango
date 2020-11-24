@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { Publicacion } from 'src/app/models/publicacion';
 import { PublicacionService } from '../../services/publicacion.service';
 import { MapsAPILoader, MouseEvent } from '@agm/core';
+import { AppComponent } from 'src/app/app.component';
 
 
 @Component({
@@ -44,6 +45,7 @@ export class PublicacionesComponent implements OnInit {
   // tslint:disable-next-line: member-ordering
   user: string;
   // tslint:disable-next-line: typedef
+  provider: string;
   ngOnInit() {
     this.getPublicaciones();
     this.conectarDatos();
@@ -134,6 +136,7 @@ export class PublicacionesComponent implements OnInit {
     this.reincidencias = this.publicacionService.selectedPublicacion.reincidencias;
     this.latitude = (this.publicacionService.selectedPublicacion.latitud);
     this.longitude = this.publicacionService.selectedPublicacion.longitud;
+    this.provider = AppComponent.provider;
   }
 
 
@@ -145,7 +148,7 @@ export class PublicacionesComponent implements OnInit {
         /// aquí vas a poner los datos que no son necesarios tomar desde el modal, pero aun no
         this.lat = (this.latitude).toString();
         this.lng = (this.longitude).toString();
-        this.user = 'KEVIN uwu';
+        this.user = AppComponent.user;
         // tslint:disable-next-line: align
         this.publicacionService.postPublicacion(this.titulo, this.fecha, this.categoria,
         this.descripcion, this.archivos, this.latitude, this.longitude, this.denuncias,

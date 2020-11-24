@@ -4,6 +4,7 @@ import { FacebookLoginProvider, GoogleLoginProvider } from 'angularx-social-logi
 import { Router } from '@angular/router';
 import { AppComponent } from '../../app.component';
 import { DataService } from '../../services/data.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +21,7 @@ export class LoginComponent implements OnInit {
   AT: string;
   provider: string;
 
-  constructor(private authService: SocialAuthService, private router: Router, private dataService: DataService) { }
+  constructor(private authService: SocialAuthService, private router: Router, private dataService: DataService, private autService: AuthService) { }
 
   ngOnInit(): void {
     this.authService.authState.subscribe((user) => {
@@ -30,7 +31,6 @@ export class LoginComponent implements OnInit {
     });
 
   }
-
 
   ngAfterContentChecked(): void {
     if (AppComponent.logged === true) {
@@ -43,12 +43,12 @@ export class LoginComponent implements OnInit {
 
   signInWithGoogle(): void {
     this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
-    this.sign();
+    this.login();
   }
 
   signInWithFB(): void {
     this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
-    this.sign();
+    this.login();
   }
 
   signOut(): void {
@@ -58,6 +58,20 @@ export class LoginComponent implements OnInit {
       console.log(resultado);
     }, (err) => {
       console.log(err);
+    });
+  }
+
+  login(){
+    this.authService.authState.subscribe((user) => {
+      this.user = user;
+      this.provider = this.user.provider;
+      this.email = this.user.email;
+      this.name = this.user.name;
+      this.foto = this.user.photoUrl;
+      this.provider = this.provider + '*' + this.email;
+      console.log('you are logging in');
+      this.autService.login(this.provider, this.email, this.name, this.foto);
+      }, (error) => {console.log(error);
     });
   }
 

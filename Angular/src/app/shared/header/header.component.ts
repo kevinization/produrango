@@ -50,20 +50,16 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.username = AppComponent.user;
-    this.logged = AppComponent.logged;
-    this.email = AppComponent.email;
-    this.foto = AppComponent.foto;
-    this.AT = AppComponent.AT;
-    this.provider = AppComponent.provider;
   }
 
   ngAfterContentChecked(): void {
-      this.logged = AppComponent.logged;
-      if (this.logged === true) {
+      if (localStorage.getItem('logged') === "true") {
         this.username = AppComponent.user;
+        this.logged = true;
         this.email = AppComponent.email;
         this.foto = AppComponent.foto;
+        this.AT = AppComponent.AT;
+        this.provider = AppComponent.provider;
       }
   }
 

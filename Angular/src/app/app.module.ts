@@ -23,6 +23,8 @@ import { FooterComponent } from './shared/footer/footer.component';
 import { PublicacionesComponent } from './modals/publicaciones/publicaciones.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AgmCoreModule } from '@agm/core';
+import { ProfileComponent } from './components/profile/profile.component';
+import { AddButtonsComponent } from './shared/add-buttons/add-buttons.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +37,8 @@ import { AgmCoreModule } from '@agm/core';
     FooterComponent,
     ExamplesComponent,
     PublicacionesComponent,
+    ProfileComponent,
+    AddButtonsComponent,
   ],
   imports: [
     BrowserModule,

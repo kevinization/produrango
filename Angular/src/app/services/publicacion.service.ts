@@ -41,6 +41,10 @@ export class PublicacionService {
     return this.http.post(this.URL_API, newPublicacion);
   }
 
+  putDenuncia(_id: string){
+    //return this.http.put(this.URL_API + `/${_id}`, _id );
+  }
+
   putPublicacion(publicacion: Publicacion){
     return this.http.put(this.URL_API + `/${publicacion._id}`, publicacion);
   }

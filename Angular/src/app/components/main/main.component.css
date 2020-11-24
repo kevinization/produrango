@@ -1,27 +1,11 @@
-.card {
-    padding: 2%;
-    margin-left: 4%;
-    margin-right: 4%;
-    margin-bottom: 2%;
-}
-
-.username{
-    color: blueviolet;
-}
-
-.username :hover{
-   color: blue;
-}
-
- .username :hover{
-    color: blue;
- }
-
- .imgArchivo{
-     height: 15em !important;
- }
-
- agm-map{
-     width: 900px;
-     height: 300px;
- }
+.card { padding: 2%; margin-left: 4%; margin-right: 4%; margin-bottom: 2%; }
+.username{ color: blueviolet; }
+.username :hover{ color: blue; }
+.username :hover{ color: blue; }
+agm-map{ width: 100%; height: 200px;}
+.icon-den{font-size: large;}
+.icon-den :hover { color: rgb(95, 15, 55); transform:scale(1.2); }
+.doc{display: flex;flex-flow: column wrap;width: 100%; height: 300px;justify-content: center;align-items: center;background: #333944;}
+.box{width: 100%; height: auto;background: #CCC;overflow: hidden;}
+.box img{width: 100%;height: auto;}
+.cardBody{flex: 1 1 auto;min-height: 1px;padding-right: 1.25rem; padding-left: 1.25rem;}

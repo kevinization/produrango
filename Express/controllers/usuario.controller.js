@@ -1,5 +1,5 @@
 const Usuario = require('../models/usuario');
-
+const jwt = require('jsonwebtoken');
 const usuarioCtrl = {};
 
 usuarioCtrl.getUsuarios = async (req, res) => {
@@ -17,19 +17,68 @@ usuarioCtrl.createUsuario = async (req, res) => {
     });
     console.log(usuario);
 
-    await Usuario.findOne({provider: req.body.provider, email: req.body.email}).exec((error, admin) => {
-        if(admin != null){
-            res.json({
-                'status': 'Usuario existente'
-            });
-        }else{
-            usuario.save();
-            res.json({
-                'status': 'Usuario guardado'
-            });
-        }
+    Usuario.findOne({provider: req.body.provider, email: req.body.email}).exec((error, admin) => {
+            if(admin != null){
+                //ya esta registrado
+                jwt.sign({user:usuario},'secretkey',{expiresIn: '1h'},(err, token )=>{
+                    res.json({
+                        token: token,
+                        user: admin
+                    });
+                });
+            }else{
+                //registra usuario
+                usuario.save();
+                jwt.sign({user:usuario},'secretkey',{expiresIn: '1h'},(err, token )=>{
+                    res.json({
+                        token: token,
+                        user: usuario
+                    });
+                });
+            }
     });
 };
+
+usuarioCtrl.authenticate = async (req, res) => {
+        const user = {
+            id: 1,
+            nombre : "Henry",
+            email: "henry@email.com"
+        }
+    
+        jwt.sign({user}, 'secretkey', {expiresIn: '60s'}, (err, token) => {
+            res.json({
+                token
+            });
+        });
+};
+
+usuarioCtrl.login = checkToken, (req, res ) => {
+    console.log(req);
+
+};
+
+// Authorization: Bearer <token>
+function checkToken(req, res, next){
+    const bearerHeader =  req.headers['authorization'];
+    
+     if(typeof bearerHeader !== undefined){
+          const bearerToken = bearerHeader.split(" ")[1];
+          jwt.verify(req.token, 'secretkey', (error, authData ) => {
+            if(error){
+                res.sendStatus(403);
+            }else{
+                res.json({
+                    token: req.token,
+                    authData: authData
+                });
+            }
+        });
+        next();
+     }else{
+         res.sendStatus(403);
+     }
+}
 
 usuarioCtrl.getU = async (req, res) => {
     if((req.params.authT) !== undefined || (req.params.authT) !== "" ){

@@ -1,6 +1,6 @@
 import { Component} from '@angular/core';
 import { DataService } from './services/data.service';
-
+import { AuthService } from './services/auth.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -65,15 +65,15 @@ export class AppComponent{
     zoom: number;
     mapTypeId: string;
     located: boolean;
+    T: string;
 
-    constructor(dataService: DataService){
-      debugger
-      if (AppComponent.provider != null || AppComponent.provider != ''){
-        dataService.searchUser(AppComponent.provider).subscribe((res) => {
-          console.log(res);
-        }, (e) =>{
-          console.log(e);
-        });
+    constructor(dataService: DataService, authService: AuthService){
+      if (localStorage.getItem('logged') === "true") {
+        //verifica mos si el token aun es valid
+        AppComponent.user = localStorage.getItem('name');
+        AppComponent.email = localStorage.getItem('email');
+        AppComponent.foto = localStorage.getItem('foto');
+        AppComponent.provider = localStorage.getItem('prvd');
       }
     }
 }

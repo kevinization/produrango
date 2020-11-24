@@ -15,11 +15,11 @@ import { keyframes } from '@angular/animations';
 })
 export class MainComponent implements OnInit {
   logged: boolean;
-  private _username = "";
+  private _username = '';
   lt: number = 0;
   lg: number = 0;
-  zoom = 6;
-  u: number =-104.66528353442382;
+  zoom = 15;
+  u: number = -104.66528353442382;
   v: number = 24.0094042544207;
   f: boolean;
   markers: marker[] = [];
@@ -68,8 +68,11 @@ export class MainComponent implements OnInit {
     }
   }
 
-  aumentarDen(den: number){
-    den = den + 1;
+  aumentarDen(_id: string){
+    console.log(_id);
+    /*this.publicacionService.putDenuncia(_id).subscribe(res => {
+      console.log('si funciona');
+    });*/
   }
 
     // tslint:disable-next-line: typedef
