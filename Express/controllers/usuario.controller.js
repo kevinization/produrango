@@ -13,7 +13,8 @@ usuarioCtrl.createUsuario = async (req, res) => {
         name: req.body.name,
         email: req.body.email,
         foto: req.body.foto,
-        tipo: req.body.tipo
+        prvd: req.body.prvd,
+        tipo: 'Normal'
     });
     console.log(usuario);
 

@@ -13,13 +13,14 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  login(prvd: string, correo: string, nombre: string, fot: string) {
+  login(prvdr: string, correo: string, nombre: string, fot: string) {
+    var AT = prvdr + '*' + correo;
     let newData = {
-      provider: prvd,
+      provider: prvdr,
       email: correo,
       name: nombre,
       foto: fot,
-      tipo: 'Normal'
+      prvd: AT
     };
     this.http.post(this.uri, newData).subscribe((resp: any) => {
       this.router.navigate(['profile']);
@@ -33,7 +34,7 @@ export class AuthService {
       AppComponent.user = nombre;
       AppComponent.email = correo;
       AppComponent.foto = fot;
-      AppComponent.provider = prvd;
+      AppComponent.provider = prvdr;
       AppComponent.logged = true;
     });
   }

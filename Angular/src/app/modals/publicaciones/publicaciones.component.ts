@@ -190,5 +190,19 @@ export class PublicacionesComponent implements OnInit {
         });
       }
     }
+    /*ngAfterContentChecked(): void {
+      // tslint:disable-next-line: no-unused-expression
+      this.titulo = this.publicacionService.selectedPublicacion.titulo;
+      // tslint:disable-next-line: no-unused-expression
+      this.descripcion = this.publicacionService.selectedPublicacion.descripcion;
+        // tslint:disable-next-line: no-unused-expression
+      this.categoria = this.publicacionService.selectedPublicacion.categoria;
+        // tslint:disable-next-line: no-unused-expression
+      this.archivos = this.publicacionService.selectedPublicacion.archivos;
+        // tslint:disable-next-line: no-unused-expression
+      this.latitude = this.publicacionService.selectedPublicacion.latitud;
+        // tslint:disable-next-line: no-unused-expression
+      this.longitude = this.publicacionService.selectedPublicacion.longitud;
+    }*/
 }
 

@@ -26,12 +26,15 @@ export class PublicacionService {
 
   postPublicacion(tit: string, fe: string, cat: string, des: string,
                   arch: string, lng: number, lat: number, den: number, rein: number, username: string){
+    let p = localStorage.getItem('prvd');
+    let e = localStorage.getItem('email');
     let newPublicacion = {
       titulo : tit,
       fecha: fe,
       categoria: cat,
       descripcion: des,
       archivos: arch,
+      prvd: p + '*' + e,
       longitud: lng,
       latitud: lat,
       denuncias: den,

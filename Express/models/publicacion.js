@@ -9,6 +9,7 @@ const publicacionSchema = new Schema({
     archivos: { type: String },
     latitud: { type: Number, /*required: true*/ },
     longitud: { type: Number, /*required: true*/ },
+    prvd: { type: String, /*required: true*/ },
     denuncias: { type: Number, /*required: true*/ },
     reincidencias: { type: Number, /*required: true*/ },
     confirmacion_reincidencias: { type: Boolean},

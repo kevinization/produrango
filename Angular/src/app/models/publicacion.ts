@@ -7,13 +7,14 @@ export class Publicacion {
     archivos: string;
     latitud: number;
     longitud: number;
+    prvd: string;
     denuncias: number;
     reincidencias: number;
     confirmacion_reincidencias: boolean;
     contenido_comentario: string;
     nombre_usuario: string;
 
-    constructor(_id = '', titulo = '', fecha = '', categoria = '', descripcion = '', archivos = '',
+    constructor(_id = '', titulo = '', fecha = '', categoria = '', prvd='', descripcion = '', archivos = '',
                 latitud = 0, longitud =0, denuncias = 0, reincidencias = 0, confirmacion_reincidencias = false,
                 contenido_comentario = '', nombre_usuario = '' ){
         this._id = _id;
@@ -24,6 +25,7 @@ export class Publicacion {
         this.archivos = archivos;
         this.latitud = latitud;
         this.longitud = longitud;
+        this.prvd = prvd;
         this.denuncias = denuncias;
         this.reincidencias = reincidencias;
         this.confirmacion_reincidencias = confirmacion_reincidencias;

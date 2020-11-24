@@ -16,6 +16,7 @@ publicacionCtrl.createPublicacion = async (req, res) => {
         archivos: req.body.archivos,
         latitud: req.body.latitud,
         longitud: req.body.longitud,
+        prvd: req.body.prvd,
         denuncias: req.body.denuncias,
         reincidencias: req.body.reincidencias,
         confirmacion_reincidencias: req.body.confirmacion_reincidencias,

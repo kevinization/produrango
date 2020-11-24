@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Publicacion } from 'src/app/models/publicacion';
 import { AppComponent } from 'src/app/app.component';
-
+import { PublicacionesComponent } from '../../modals/publicaciones/publicaciones.component';
 import { PublicacionService } from '../../services/publicacion.service';
 import { ExampleService } from '../../services/example.service';
 import { keyframes } from '@angular/animations';
@@ -48,10 +48,24 @@ export class MainComponent implements OnInit {
             draggable: false
           });
         }
-
         console.log(this.markers);
         this.publicacionService.publicaciones = res as Publicacion[];
       });
+  }
+  obtenerDatos(titulo: string, descripcion: string, categoria: string, archivos: string, latitud: number, longitud: number){
+    console.log(titulo, descripcion, categoria, archivos, latitud, longitud);
+    // tslint:disable-next-line: no-unused-expression
+    this.publicacionService.selectedPublicacion.titulo;
+     // tslint:disable-next-line: no-unused-expression
+    this.publicacionService.selectedPublicacion.descripcion;
+     // tslint:disable-next-line: no-unused-expression
+    this.publicacionService.selectedPublicacion.categoria;
+     // tslint:disable-next-line: no-unused-expression
+    this.publicacionService.selectedPublicacion.archivos;
+     // tslint:disable-next-line: no-unused-expression
+    this.publicacionService.selectedPublicacion.latitud;
+     // tslint:disable-next-line: no-unused-expression
+    this.publicacionService.selectedPublicacion.longitud;
   }
 
   getPublicaciones2() {

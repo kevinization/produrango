@@ -69,7 +69,6 @@ export class AppComponent{
 
     constructor(dataService: DataService, authService: AuthService){
       if (localStorage.getItem('logged') === "true") {
-        //verifica mos si el token aun es valid
         AppComponent.user = localStorage.getItem('name');
         AppComponent.email = localStorage.getItem('email');
         AppComponent.foto = localStorage.getItem('foto');

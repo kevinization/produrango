@@ -72,4 +72,89 @@
             <button class="btn btn-primary">Limpiar</button>
             <button class="btn btn-primary" (click)="addPublicacion()">Publicar</button>
           </div>
+        </form>
+      </div>
+    </div>
+  </div>
+       
+          
+
+<!-- Modal Actualizar-->
+<div class="modal fade" id="modalEditarPublicaciones" #modalActualizar tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Añadir una publicación</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form >
+        <div id="alertaPublicacion"></div>
+        <input type="hidden" name="_id" id="_id" [(ngModel)]="id">
+        <div class="modal-body">
+          <div class="position-relative form-group">
+              <label for="">Titulo</label>
+              <input type="text" name="titulo" id="titulo" class="form-control" [(ngModel)]="titulo" placeholder="Título">
+          </div>
+          <div class="position-relative form-group">
+            <label for="categoria" class="">Categoría</label>
+            <select [(ngModel)]="categoria" name="select" id="categoria" class="form-control">
+                <option disabled="true" selected >- Seleccione el tipo de publicación -</option>
+                <option>Educación</option>
+                <option>Salud</option>
+                <option>Seguridad</option>
+                <option>Otro</option>
+            </select>
+          </div>
+          <div class="position-relative form-group">
+              <label for="">Descripcion</label>
+              <input type="text" name="descripcion" id="descripcion" class="form-control" [(ngModel)]="descripcion" placeholder="Descripción">
+          </div>
+          <div class="position-relative form-group">
+              <label for="">Archivos</label>
+              <div class="input-group mb-3">
+                <div class="custom-file">
+                  <input type="file" name="archivos" class="custom-file-input" id="archivos" [(ngModel)]="archivos" aria-describedby="archivosAddon" placeholder="Opcional">
+                  <label class="custom-file-label" for="archivos">Browse</label>
+                </div>
+              </div>
+          </div>
+          <div class="position-relative form-group d-flex justify-content-center">
+
+            <div class="card" style="width: 29rem;">
+
+
+              <div class="form-group">
+                <label>Ubicación</label>
+                <input type="text" class="form-control" (keydown.enter)="$event.preventDefault()" placeholder="Buscar la ubicación del incidente" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" #search>
+              </div>
+
+              <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">
+                <agm-marker [latitude]="latitude" [longitude]="longitude" [markerDraggable]="draggable"
+                  (dragEnd)="markerDragEnd($event)"></agm-marker>
+              </agm-map>
+
+              <h5>Dirección: {{address}}</h5>
+              <div>Latitud: {{latitude}}</div>
+              <div>Longitud: {{longitude}}</div>
+
+              <div class="card-body">
+                <button (click)="confirmarDireccion()" class="btn btn-primary  d-flex justify-content-center">Confirmar dirección</button>
+              </div>
+              
+            </div>
+
+
+          </div>
+        </div>
+        
+        <div class="modal-footer">
+          <button class="btn btn-primary">Limpiar</button>
+          <button class="btn btn-primary" >Guardar Cambios</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 

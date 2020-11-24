@@ -68,7 +68,6 @@ export class LoginComponent implements OnInit {
       this.email = this.user.email;
       this.name = this.user.name;
       this.foto = this.user.photoUrl;
-      this.provider = this.provider + '*' + this.email;
       console.log('you are logging in');
       this.autService.login(this.provider, this.email, this.name, this.foto);
       }, (error) => {console.log(error);

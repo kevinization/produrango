@@ -7,6 +7,7 @@ const usuarioSchema = new Schema({
     email: { type: String, required: true},
     tipo: { type: String},
     foto: { type: String},
+    prvd: { type: String},
     telefono: { type: String},
     num_reportes: { type: Number }
 
