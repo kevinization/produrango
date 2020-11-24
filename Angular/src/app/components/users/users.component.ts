@@ -14,8 +14,11 @@ export class UsersComponent implements OnInit {
 
   constructor(public userService: UsersService) { }
 
+  editTipo: boolean;
+
   ngOnInit(): void {
     this.getUsuarios();
+    this.editTipo = false;
   }
 
     // tslint:disable-next-line: typedef
@@ -39,6 +42,8 @@ export class UsersComponent implements OnInit {
             this.getUsuarios();
           });
       }
+
+      this.editTipo = false;
     }
 
       // tslint:disable-next-line: typedef
@@ -53,6 +58,7 @@ export class UsersComponent implements OnInit {
     // tslint:disable-next-line: typedef
     editUsuario(usuario: Usuario) {
       this.userService.selectedUser = usuario;
+      this.editTipo = true;
     }
 
       // tslint:disable-next-line: typedef

@@ -6,52 +6,49 @@
                     <form #usuarioForm="ngForm" (ngSubmit)="addUsuarios(usuarioForm)">
                         <div id="mensajeGuardarUsuario"></div>
                         <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="userService.selectedUser._id">
-                        <div>
+                        <div *ngIf="editTipo">
+                           
                             <div>
-                                <input type="text" name="nombre" #nombre="ngModel" [(ngModel)]="userService.selectedUser.name" placeholder="Ingresa el nombre">
+                                <select name="tipo"  [(ngModel)]="userService.selectedUser.tipo" >
+                                    <option>Normal</option>
+                                    <option>Administrador</option>
+                                </select>
                             </div>
-                            <div>
-                                <input type="text" name="tipo" #tipo="ngModel" [(ngModel)]="userService.selectedUser.tipo" placeholder="Ingresa el tipo">
-                            </div>
-                            <div>
-                                <input type="text" name="foto" #foto="ngModel" [(ngModel)]="userService.selectedUser.foto" placeholder="Ingresa la foto">
-                            </div>
-                            <div>
-                                <input type="text" name="num_reportes" #num_reportes="ngModel" [(ngModel)]="userService.selectedUser.num_reportes" placeholder="Ingresa el num de reportes">
-                            </div>
+                            
                             <div>
                                 <div>
-                                    <button (click)=resetForm(usuarioForm)>Limpiar</button>
-                                    <button>Guardar</button>
+                                   <!--  <button (click)=resetForm(usuarioForm)>Limpiar</button> -->
+                                    <button class="btn btn-success" (click)="addUsuarios(usuarioForm)">Guardar</button>
                                 </div>
                             </div>
+                            <hr>
                         </div>
                     </form>
 
 
 
-
-                    <table class="table">
+                    
+                    <table class="table text-center">
                         <thead>
                             <th>Nombre</th>
-                            <th>Tipo</th>
                             <th>Foto</th>
-                            <th>Num. Reportes</th>
+                            <th>Rol</th>
+                            <th>Email</th>
                             <th>Operaciones</th>
                         </thead>
                         <tbody>
                             <tr *ngFor="let user of userService.users">
                                 <td>{{ user.name }}</td>
-                                <td>{{ user.contrasena }}</td>
+                                <td><img class="imgRadius" src="{{user.foto}}"></td>
                                 <td>{{ user.tipo }}</td>
-                                <td>{{ user.foto }}</td>
-                                <td>{{ user.num_reportes }}</td>
+                                <td>{{ user.email }}</td>
                                 <td>
-                                    <a (click)="editUsuario(user)">
-                                        <i class="material-icons">edit</i>
+                                    <a (click)="editUsuario(user)" class="btn btn-info">
+                                        <i class="fas fa-user-edit textColor">Editar rol</i>
                                     </a>
-                                    <a (click)="deleteUsuario(user._id)">
-                                        <i class="material-icons">delete</i>
+                                    ㅤ
+                                    <a (click)="deleteUsuario(user._id)" class="btn btn-danger">
+                                        <i class="fas fa-trash-alt textColor">Eliminar</i>
                                     </a>
                                 </td>
                             </tr>
