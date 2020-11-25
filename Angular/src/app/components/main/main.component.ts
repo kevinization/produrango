@@ -24,6 +24,8 @@ export class MainComponent implements OnInit {
   f: boolean;
   markers: marker[] = [];
 
+  pageActual: number = 1;
+
   private static _id: string = '';
   static get id(): string {
     return MainComponent._id;

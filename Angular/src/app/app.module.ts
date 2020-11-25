@@ -25,6 +25,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AgmCoreModule } from '@agm/core';
 import { ProfileComponent } from './components/profile/profile.component';
 import { AddButtonsComponent } from './shared/add-buttons/add-buttons.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { AddButtonsComponent } from './shared/add-buttons/add-buttons.component'
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDAZkJAbosyGy9hvprE-NdZgVVVALUZDyU',
       libraries: ['places']
-    })
+    }),
+    NgxPaginationModule
   ],
   providers: [
     {
