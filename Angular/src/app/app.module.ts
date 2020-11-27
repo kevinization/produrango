@@ -26,7 +26,7 @@ import { AgmCoreModule } from '@agm/core';
 import { ProfileComponent } from './components/profile/profile.component';
 import { AddButtonsComponent } from './shared/add-buttons/add-buttons.component';
 import { NgxPaginationModule } from 'ngx-pagination';
-
+import { PublicacionComponent } from './components/publicacion/publicacion.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,6 +40,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     PublicacionesComponent,
     ProfileComponent,
     AddButtonsComponent,
+    PublicacionComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,7 +53,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
       apiKey: 'AIzaSyDAZkJAbosyGy9hvprE-NdZgVVVALUZDyU',
       libraries: ['places']
     }),
-    NgxPaginationModule
+    NgxPaginationModule,
   ],
   providers: [
     {

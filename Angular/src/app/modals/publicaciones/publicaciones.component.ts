@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild, ElementRef, NgZone } from '@angular/core';
-import { NgForm } from '@angular/forms';
 import { Publicacion } from 'src/app/models/publicacion';
 import { PublicacionService } from '../../services/publicacion.service';
 import { MapsAPILoader, MouseEvent } from '@agm/core';
 import { AppComponent } from 'src/app/app.component';
 import { MainComponent } from '../../components/main/main.component';
+import * as m from 'moment';
 
 @Component({
   selector: 'app-publicaciones',
@@ -47,6 +47,7 @@ export class PublicacionesComponent implements OnInit {
   user: string;
   // tslint:disable-next-line: typedef
   provider: string;
+  
   ngOnInit() {
     this.getPublicaciones();
     this.conectarDatos();
@@ -145,6 +146,9 @@ export class PublicacionesComponent implements OnInit {
     addPublicacion(){
       var alerta = document.getElementById('alertaPublicacion');
       alerta.innerHTML = '';
+      m.locale('es');
+      let f = m().format('D MMMM YYYY, h:mm a');
+      this.fecha = (f).toString();
        if(this.draggable === false){
         /// aquí vas a poner los datos que no son necesarios tomar desde el modal, pero aun no
         this.lat = (this.latitude).toString();
@@ -158,21 +162,17 @@ export class PublicacionesComponent implements OnInit {
             alerta.innerHTML = alerta.innerHTML + '<div class=\'alert alert-success alert-dismissible fade show\' role=\'alert\'>' +
                             '<strong>Publicación añadida con exito </strong><button type=\'button\' class=\'close\' data-dismiss=\'alert\' aria-label=\'Close\'>' +
                             '<span aria-hidden=\'true\'>&times;</span> </button> </div>';
-            this.getPublicaciones();
+            this.publicacionService.getPublicaciones('false');
         });
       }else{
         alerta.innerHTML = alerta.innerHTML + '<div class=\'alert alert-danger alert-dismissible fade show\' role=\'alert\'>' +
                             '<strong>Necesita confirmar la ubicación...</strong><button type=\'button\' class=\'close\' data-dismiss=\'alert\' aria-label=\'Close\'>' +
                             '<span aria-hidden=\'true\'>&times;</span> </button> </div>';
-      } 
+      }
     }
     // tslint:disable-next-line: typedef
     getPublicaciones() {
-      this.publicacionService.getPublicaciones()
-        .subscribe(res => {
-          this.publicacionService.publicaciones = res as Publicacion[];
-          console.log(res);
-        });
+      this.publicacionService.getPublicaciones('false');
     }
     updatePublicacion(){
       console.log(this.id);

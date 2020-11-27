@@ -21,7 +21,12 @@ export class LoginComponent implements OnInit {
   AT: string;
   provider: string;
 
-  constructor(private authService: SocialAuthService, private router: Router, private dataService: DataService, private autService: AuthService) { }
+  constructor(private authService: SocialAuthService, private router: Router,
+              private dataService: DataService, private autService: AuthService) {
+                if (localStorage.getItem('logged') === 'true'){
+                  this.router.navigateByUrl('#');
+                }
+              }
 
   ngOnInit(): void {
     this.authService.authState.subscribe((user) => {
@@ -51,16 +56,6 @@ export class LoginComponent implements OnInit {
     this.login();
   }
 
-  signOut(): void {
-    this.authService.signOut();
-    this.dataService.inactiveUser(this.provider).subscribe((resultado) => {
-      AppComponent.logged = false;
-      console.log(resultado);
-    }, (err) => {
-      console.log(err);
-    });
-  }
-
   login(){
     this.authService.authState.subscribe((user) => {
       this.user = user;
@@ -71,28 +66,6 @@ export class LoginComponent implements OnInit {
       console.log('you are logging in');
       this.autService.login(this.provider, this.email, this.name, this.foto);
       }, (error) => {console.log(error);
-    });
-  }
-
-  sign(){
-    this.authService.authState.subscribe((user) => {
-      this.user = user;
-      this.provider = this.user.provider;
-      this.email = this.user.email;
-      this.name = this.user.name;
-      this.foto = this.user.photoUrl;
-      this.provider = this.provider + '*' + this.email;
-      this.dataService.authUser(this.provider, this.email, this.name, this.foto).subscribe((resultado) => {
-        console.log(resultado);
-        AppComponent.user = this.name;
-        AppComponent.logged = true;
-        AppComponent.email = this.email;
-        AppComponent.foto = this.foto;
-        this.dataService.activeUser(this.provider).subscribe((res) => {
-          AppComponent.provider = this. provider;
-          console.log(res);
-        }, (err) => {console.log(err); });
-      }, (error) => {console.log(error); });
     });
   }
 

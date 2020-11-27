@@ -10,7 +10,7 @@ router.post('/', usuario.createUsuario);
 router.post('/login', usuario.login);
 router.post('/authenticate', usuario.authenticate);
 //router.get('/:provider', usuario.getUsuarios);
-router.get('/:authT', usuario.getU);
+router.get('/:id', usuario.getU);
 router.put('/:id', usuario.editUsuario);
 router.delete('/:id', usuario.deleteUsuario);
 

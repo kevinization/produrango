@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterModule, Router, NavigationEnd } from '@angular/router';
 import { AppComponent } from 'src/app/app.component';
-import { DataService } from '../../services/data.service';
+import { AuthService } from '../../services/auth.service';
 import { SocialAuthService, SocialUser } from 'angularx-social-login';
 
 @Component({
@@ -11,11 +11,15 @@ import { SocialAuthService, SocialUser } from 'angularx-social-login';
   providers: [AppComponent]
 })
 export class HeaderComponent implements OnInit {
-
-  constructor(private router: Router, private dataService: DataService, private authService: SocialAuthService) { }
+  flag: boolean = false;
+  constructor(private authService: SocialAuthService, private AService: AuthService, private router: Router) { 
+    if (AppComponent.type === 'Administrador'){
+      this.flag = true;
+    }
+  }
 
   AT: string;
-  logged: boolean;
+  logged = false;
 
   private _username = '';
   public get username() {
@@ -53,25 +57,24 @@ export class HeaderComponent implements OnInit {
   }
 
   ngAfterContentChecked(): void {
-      if (localStorage.getItem('logged') === "true") {
+    if (localStorage.getItem('logged') === 'true') {
         this.username = AppComponent.user;
         this.logged = true;
         this.email = AppComponent.email;
         this.foto = AppComponent.foto;
         this.AT = AppComponent.AT;
         this.provider = AppComponent.provider;
-      }
+    }
   }
-
+  perfil(){
+    let id = this.provider + '*' + this.email;
+    localStorage.setItem('profile', id);
+    this.router.navigateByUrl('profile');
+  }
   signOut(): void {
-    this.AT = AppComponent.AT;
-    console.log(this.AT);
-    this.dataService.inactiveUser(this.AT).subscribe((resultado) => {
-      console.log(resultado);
-      this.authService.signOut();
-    }, (err) => {
-      console.log(err);
-    });
+    this.authService.signOut();
+    this.AService.logout();
+    window.location.reload();
   }
 
 }

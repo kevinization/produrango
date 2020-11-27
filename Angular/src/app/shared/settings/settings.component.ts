@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SettingsService } from 'src/app/services/settings.service';
 import { COLORS } from 'src/app/data/colors';
+import { AppComponent } from '../../app.component';
 
 @Component({
   selector: 'app-settings',
@@ -9,8 +10,13 @@ import { COLORS } from 'src/app/data/colors';
 })
 export class SettingsComponent implements OnInit {
   colors = COLORS;
+  flag: boolean = false;
 
-  constructor(public _ajustes: SettingsService) { }
+  constructor(public _ajustes: SettingsService) {
+    if (AppComponent.type === 'Administrador'){
+      this.flag = true;
+    }
+  }
 
    CambiarColor(color: string, element: string) {
     if (element === 'header') {
@@ -23,6 +29,12 @@ export class SettingsComponent implements OnInit {
 
   ngOnInit(): void {
     this._ajustes.cargarAjustes();
+  }
+  
+  ngAfterContentChecked(): void {
+    if (AppComponent.type === 'Administrador'){
+      this.flag = true;
+    }
   }
 
   seleccionar(event, element) {

@@ -1,20 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
 import { Publicacion } from 'src/app/models/publicacion';
 import { AppComponent } from 'src/app/app.component';
-import { PublicacionesComponent } from '../../modals/publicaciones/publicaciones.component';
 import { PublicacionService } from '../../services/publicacion.service';
 import { ExampleService } from '../../services/example.service';
-import { keyframes } from '@angular/animations';
 
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.css'],
-  providers: [PublicacionService]
+  providers: [PublicacionService, AppComponent]
 })
 export class MainComponent implements OnInit {
   logged: boolean;
+  prvd: string;
   private _username = '';
   lt: number = 0;
   lg: number = 0;
@@ -22,8 +20,7 @@ export class MainComponent implements OnInit {
   u: number = -104.66528353442382;
   v: number = 24.0094042544207;
   f: boolean;
-  markers: marker[] = [];
-
+  just: false;
   pageActual: number = 1;
 
   private static _id: string = '';
@@ -101,22 +98,13 @@ export class MainComponent implements OnInit {
     this.f = false;
     this.logged = AppComponent.logged;
     this.getPublicaciones();
+    this.logged = AppComponent.logged;
+    if (this.logged === true) {
+      this.prvd = AppComponent.provider + '*' + AppComponent.email;
+      console.log (this.prvd);
+    }
   }
   // tslint:disable-next-line: typedef
-  getPublicaciones() {
-    this.publicacionService.getPublicaciones()
-      .subscribe(res => {
-        for (let i= 0; i < Object.keys(res).length; i++){
-          this.markers.push({
-            lat: Number(res[i].latitud),
-            lng: Number(res[i].longitud),
-            draggable: false
-          });
-        }
-        console.log(this.markers);
-        this.publicacionService.publicaciones = res as Publicacion[];
-      });
-  }
   
   obtenerDatos(id: string, titulo: string, descripcion: string, categoria: string, archivos: string, latitud: number, longitud: number){
     MainComponent.id = id;
@@ -131,8 +119,17 @@ export class MainComponent implements OnInit {
   obtenerId(id: string){
     MainComponent.id = id;
   }
-  getPublicaciones2() {
-    this.publicacionService.getPublicaciones()
+
+  buscarID(id: string){
+    localStorage.setItem('publicacion', id);
+  }
+
+  encontrarID(id: string){
+    localStorage.setItem('profile', id);
+  }
+
+  getPublicaciones() {
+    this.publicacionService.getPublicaciones('false')
       .subscribe(res => {
         this.publicacionService.publicaciones = res as Publicacion[];
       });
@@ -142,31 +139,16 @@ export class MainComponent implements OnInit {
     this.logged = AppComponent.logged;
     if (this.logged === true) {
       this.username = AppComponent.user;
+      this.prvd = AppComponent.provider + '*' + AppComponent.email;
+      console.log (this.prvd);
+      
     }
   }
 
-  aumentarDen(_id: string){
-    console.log(_id);
-    /*this.publicacionService.putDenuncia(_id).subscribe(res => {
-      console.log('si funciona');
-    });*/
+  aumentarDen(Id: string, den: number){
+    console.log(Id);
+    this.publicacionService.putDenuncia(Id, den).subscribe(res => {
+      console.log(res);
+    });
   }
-
-    // tslint:disable-next-line: typedef
-    /*/getUsuarios() {
-      this.publicacionService.getExamples()
-        .subscribe(res => {
-          this.publicacionService. = res as Example[];
-          console.log(res);
-        });
-    }*/
-
 }
-
-interface marker {
-  lat: number;
-  lng: number;
-  label?: string;
-  draggable: boolean;
-}
-

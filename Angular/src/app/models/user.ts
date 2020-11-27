@@ -1,9 +1,10 @@
 export class Usuario {
 
-    constructor(_id = '', name = '', contrasena = '', tipo = '', prvd = '', foto = '', email = '', num_reportes = 0){
+    constructor(_id = '', name = '', contrasena = '', provider = '', tipo = '', prvd = '', foto = '', email = '', num_reportes = 0){
         this._id = _id;
         this.name = name;
         this.contrasena = contrasena;
+        this.provider = provider;
         this.tipo = tipo;
         this.foto = foto;
         this.prvd = prvd;
@@ -15,6 +16,7 @@ export class Usuario {
     name: string;
     contrasena: string;
     tipo: string;
+    provider: string;
     foto: string;
     prvd: string;
     email: string;

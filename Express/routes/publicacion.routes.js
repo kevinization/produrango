@@ -5,7 +5,7 @@ const publicacion = require('../controllers/publicacion.controller');
 
 router.get('/', publicacion.getPublicaciones);
 router.post('/', publicacion.createPublicacion);
-router.get('/:id', publicacion.getPublicacion);
+router.get('/:prvd', publicacion.getP);
 router.put('/:id', publicacion.editPublicacion);
 router.delete('/:id', publicacion.deletePublicacion);
 

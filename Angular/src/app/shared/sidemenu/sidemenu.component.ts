@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AppComponent } from '../../app.component';
+
 
 @Component({
   selector: 'app-sidemenu',
@@ -6,8 +8,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sidemenu.component.css']
 })
 export class SidemenuComponent implements OnInit {
-
-  constructor() { }
+  flag: boolean = false;
+  constructor() {
+    if (AppComponent.type === 'Administrador'){
+      this.flag = true;
+    }
+  }
 
   ngOnInit(): void {
   }

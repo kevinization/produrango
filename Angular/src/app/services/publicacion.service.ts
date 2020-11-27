@@ -2,12 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Publicacion } from '../models/publicacion';
 import { Example } from '../models/example';
-
 @Injectable({
   providedIn: 'root'
 })
 export class PublicacionService {
-
 
   // tslint:disable-next-line: member-ordering
   selectedPublicacion: Publicacion;
@@ -20,8 +18,20 @@ export class PublicacionService {
   constructor(private http: HttpClient) {
       this.selectedPublicacion = new Publicacion();
    }
-  getPublicaciones(){
-    return this.http.get(this.URL_API);
+  getPublicaciones(flag: string){
+    let p = localStorage.getItem('prvd');
+    let e = localStorage.getItem('email');
+    if( p !== null && e !== null){
+      let prvd = p + '*' + e + ',' + flag ;
+      return this.http.get(this.URL_API + '/' + prvd);
+    }else{
+      return this.http.get(this.URL_API );
+    }
+  }
+
+  getPublicacion(id: string){
+      console.log(id);
+      return this.http.get(this.URL_API + '/' + id);
   }
 
   postPublicacion(tit: string, fe: string, cat: string, des: string,
@@ -44,8 +54,12 @@ export class PublicacionService {
     return this.http.post(this.URL_API, newPublicacion);
   }
 
-  putDenuncia(_id: string){
-    //return this.http.put(this.URL_API + `/${_id}`, _id );
+  putDenuncia(_id: string, d: number){
+      let updPublicacion = {
+        flag: true,
+        denuncias: d
+      }
+      return this.http.put(this.URL_API + '/' + _id, updPublicacion);
   }
 
   putPublicacion(ID: string, tit: string, fe: string, cat: string, des: string,
@@ -57,7 +71,8 @@ export class PublicacionService {
       descripcion: des,
       archivos: arch,
       longitud: lng,
-      latitud: lat
+      latitud: lat,
+      flag: false
     }
     return this.http.put(this.URL_API + '/' + ID, updPublicacion);
   }

@@ -2,7 +2,7 @@
 <div class="app-header header-shadow">
   <div class="app-header__logo">
       <div class=""></div> PRODURANGO
-      <div class="header__pane ml-auto">
+      <div *ngIf="flag === false" class="header__pane ml-auto">
           <div>
               <button type="button" class="hamburger close-sidebar-btn hamburger--elastic" data-class="closed-sidebar">
                   <span class="hamburger-box">
@@ -111,12 +111,12 @@
                                     <i class="fa fa-angle-down ml-2 opacity-8"></i>
                                 </a>
                                 <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu">
-                                    <button type="button" tabindex="0" class="dropdown-item">User Account</button>
-                                    <button type="button" tabindex="0" class="dropdown-item">Settings</button>
-                                    <h6 tabindex="-1" class="dropdown-header">{{username}}</h6>
-                                    <h6 tabindex="-1" class="dropdown-header">Email</h6>
+                                    <strong><h6 tabindex="0" class="dropdown-item">User Account</h6></strong>
+                                    <h6 tabindex="-1" class="dropdown-item">{{username}}</h6>
+                                    <h6 tabindex="-1" class="dropdown-item">{{email}}</h6>
                                     <div tabindex="-1" class="dropdown-divider"></div>
-                                    <button type="button" tabindex="0" class="dropdown-item" (click)="signOut()" >Log out</button>
+                                    <button type="button" tabindex="0" class="dropdown-item btn" (click)="perfil()">Mi perfil</button>
+                                    <button type="button" tabindex="0" class="dropdown-item btn" (click)="signOut()" >Log outㅤ+<i class="fas fa-sign-out-alt"></i></button>
                                 </div>
                         </div>
 

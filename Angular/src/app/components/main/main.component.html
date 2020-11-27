@@ -1,27 +1,27 @@
-  <app-add-buttons></app-add-buttons>
+
   <div class="container">
     <button class="btn btn-info" data-toggle="modal" data-target="#modalPublicaciones">Añadir</button>
   </div>
   <br>
-  <div *ngFor="let publicacion of publicacionService.publicaciones | paginate: {itemsPerPage: 10, currentPage: pageActual}; let i=index" class="row">
+  <div *ngFor="let publicacion of publicacionService.publicaciones | paginate: {itemsPerPage: 5, currentPage: pageActual}; let i=index" class="row">
       <div class="card col-10 offset-1 imgs" >
         <div class="container">
           <div class="d-flex justify-content-between align-items-center">
-            <h4 class="">{{ publicacion.titulo }}</h4>  
+            <a href="#" style="color: black;" href="publicacion" (click)="buscarID(publicacion._id)"><h4>{{ publicacion.titulo }}</h4></a>  
             <div class="dropdown">
               <a href="#" class="dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                 <a href="https://www.facebook.com/sharer/sharer.php?u=www.produrango.mx/{{publicacion._id}}" target="_blank" onclick="window.open(this.href, this.target, 'width=526,height=800'); return false;" class="dropdown-item"> <i class="fab fa-facebook"></i> Compartir en Facebook</a>
                 <a href="https://api.whatsapp.com/send?text={{publicacion.titulo}}%20www.produrango.mx/{{publicacion._id}}" target="_blank" onclick="window.open(this.href, this.target, 'width=700,height=800'); return false;" class="dropdown-item"> <i class="fab fa-whatsapp-square"></i> Compartir en WhatsApp</a>
                 <a href="https://twitter.com/intent/tweet?text={{publicacion.titulo}}&url=www.produrango.mx/{{publicacion._id}}&hashtags=PRODurango"target="_blank" onclick="window.open(this.href, this.target, 'width=700,height=800'); return false;" class="dropdown-item"> <i class="fab fa-twitter-square"></i> Compartir en Twitter</a>
-                <button type="button" class="dropdown-item" data-toggle="modal" (click)="obtenerDatos(publicacion._id,publicacion.titulo,publicacion.descripcion, publicacion.categoria, publicacion.archivos, publicacion.latitud,publicacion.longitud)" data-target="#modalEditarPublicaciones">Editar <i class="fas fa-edit"></i></button>
-                <a class="dropdown-item" data-target="#myModal" data-toggle="modal" (click)="obtenerId(publicacion._id)">Eliminar <i class="fas fa-trash"></i></a>
+                <button *ngIf="publicacion.provider === prvd && prvd !== undefined" type="button" class="dropdown-item" data-toggle="modal" (click)="obtenerDatos(publicacion._id,publicacion.titulo,publicacion.descripcion, publicacion.categoria, publicacion.archivos, publicacion.latitud,publicacion.longitud)" data-target="#modalEditarPublicaciones">Editar <i class="fas fa-edit"></i></button>
+                <a  *ngIf="publicacion.provider === prvd && prvd !== undefined" class="dropdown-item" data-target="#myModal" data-toggle="modal" (click)="obtenerId(publicacion._id)">Eliminar <i class="fas fa-trash"></i></a>
               </div>
             </div>
 					</div>
         </div>
         <div class="cardBody">
-          <a href="#"><h6>{{publicacion.nombre_usuario}}</h6></a>
+          <a href="profile" (click)="encontrarID(publicacion.prvd)"><h6>{{publicacion.nombre_usuario}}</h6></a>
           <h5>{{ publicacion.fecha }}</h5>
           <p class="card-text">{{ publicacion.descripcion }}</p>
             <div *ngIf="publicacion.archivos != ''" class="doc">
@@ -40,7 +40,7 @@
           </agm-map>
           <div class="d-flex justify-content-center">
             <span>{{publicacion.denuncias}}  </span>
-            <a class="icon-den" (click)="aumentarDen(publicacion._id)"><i class="fa fa-bullhorn"></i></a>
+            <a class="icon-den" (click)="aumentarDen(publicacion._id, publicacion.denuncias)"><i class="fa fa-bullhorn"></i></a>
           </div>
         </div>
       </div>

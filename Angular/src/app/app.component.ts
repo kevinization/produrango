@@ -33,6 +33,14 @@ export class AppComponent{
   }
   static _email: string = '';
   
+  static get type(): string {
+    return AppComponent._type;
+  }
+  static set type(value: string) {
+    AppComponent._type = value;
+  }
+  static _type: string = '';
+  
   static get foto(): string {
     return AppComponent._foto;
   }
@@ -59,7 +67,7 @@ export class AppComponent{
 
   logged: boolean = AppComponent.logged;
 
-    // Cosas para la implementación de Angular Google Maps
+    // Cosas para la implementación de Angular Google Maps+
     lat: number;
     lng: number;
     zoom: number;
@@ -71,6 +79,7 @@ export class AppComponent{
       if (localStorage.getItem('logged') === "true") {
         AppComponent.user = localStorage.getItem('name');
         AppComponent.email = localStorage.getItem('email');
+        AppComponent.type = localStorage.getItem('type');
         AppComponent.foto = localStorage.getItem('foto');
         AppComponent.provider = localStorage.getItem('prvd');
       }

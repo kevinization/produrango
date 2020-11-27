@@ -18,8 +18,10 @@
 .font-semi-white{ color: #ddd; }
 
 .font-lite-black{ color: #999; }
-
-
+.profile-img{height: auto !important; width: auto !important;}
+img{
+	height: 100px; width: auto; border-radius: 100% !important;
+}
 .intro-section{ padding-top: 200px; position: relative; background-size: cover; 
 	z-index: 1; background-image: url(../../../assets/images/image2.jpg);}
 

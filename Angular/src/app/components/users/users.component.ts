@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Usuario } from 'src/app/models/user';
-
+import { Router } from '@angular/router';
 import { UsersService } from '../../services/users.service';
 
 @Component({
@@ -12,15 +12,21 @@ import { UsersService } from '../../services/users.service';
 })
 export class UsersComponent implements OnInit {
 
-  constructor(public userService: UsersService) { }
+  constructor(public userService: UsersService, private router: Router) {
+    
+  }
 
   editTipo: boolean;
+  pageActual: number = 1;
 
   ngOnInit(): void {
     this.getUsuarios();
     this.editTipo = false;
   }
 
+  cancelarAgregar(){
+    this.editTipo = false;
+  }
     // tslint:disable-next-line: typedef
     addUsuarios(form: NgForm) {
       console.log(form.value);

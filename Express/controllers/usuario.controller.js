@@ -47,16 +47,32 @@ usuarioCtrl.authenticate = async (req, res) => {
             email: "henry@email.com"
         }
     
-        jwt.sign({user}, 'secretkey', {expiresIn: '60s'}, (err, token) => {
+        jwt.sign({user}, 'secretkey', {expiresIn: '1h'}, (err, token) => {
             res.json({
                 token
             });
         });
 };
 
-usuarioCtrl.login = checkToken, (req, res ) => {
-    console.log(req);
-
+usuarioCtrl.login = function (req, res, next ) {
+    const bearerHeader =  req.headers['authorization'];
+    
+     if(typeof bearerHeader !== undefined){
+          const bearerToken = bearerHeader.split(" ")[1];
+          jwt.verify(req.token, 'secretkey', (error, authData ) => {
+            if(error){
+                res.sendStatus(403);
+            }else{
+                res.json({
+                    token: req.token,
+                    authData: authData
+                });
+            }
+        });
+        next();
+     }else{
+         res.sendStatus(403);
+     }
 };
 
 // Authorization: Bearer <token>
@@ -82,8 +98,8 @@ function checkToken(req, res, next){
 }
 
 usuarioCtrl.getU = async (req, res) => {
-    if((req.params.authT) !== undefined || (req.params.authT) !== "" ){
-        const usuario = await Usuario.findOne({authT: req.params.aT}).exec((error, user) => {
+    if((req.params.id) !== undefined || (req.params.id) !== "" ){
+        Usuario.findOne({prvd: req.params.id}).exec((error, user) => {
             if(!error){
                 if(user != null){
                     res.json(user);

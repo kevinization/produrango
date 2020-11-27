@@ -6,8 +6,10 @@
                     <form #usuarioForm="ngForm" (ngSubmit)="addUsuarios(usuarioForm)">
                         <div id="mensajeGuardarUsuario"></div>
                         <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="userService.selectedUser._id">
+                        <input type="hidden" name="foto" #_id="ngModel" [(ngModel)]="userService.selectedUser.foto">
+                        <input type="hidden" name="num_reportes" #_id="ngModel" [(ngModel)]="userService.selectedUser.num_reportes">
+
                         <div *ngIf="editTipo">
-                           
                             <div>
                                 <select name="tipo"  [(ngModel)]="userService.selectedUser.tipo" >
                                     <option>Normal</option>
@@ -19,28 +21,28 @@
                                 <div>
                                    <!--  <button (click)=resetForm(usuarioForm)>Limpiar</button> -->
                                     <button class="btn btn-success" (click)="addUsuarios(usuarioForm)">Guardar</button>
+                                    <button class="btn btn-secondary" (click)="cancelarAgregar()">Cancelar</button>
                                 </div>
                             </div>
                             <hr>
                         </div>
                     </form>
-
-
-
                     
                     <table class="table text-center">
                         <thead>
                             <th>Nombre</th>
                             <th>Foto</th>
                             <th>Rol</th>
+                            <th>Provider</th>
                             <th>Email</th>
                             <th>Operaciones</th>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let user of userService.users">
+                            <tr *ngFor="let user of userService.users | paginate: {itemsPerPage: 5, currentPage: pageActual}; let i=index">
                                 <td>{{ user.name }}</td>
                                 <td><img class="imgRadius" src="{{user.foto}}"></td>
                                 <td>{{ user.tipo }}</td>
+                                <td>{{ user.provider }}</td>
                                 <td>{{ user.email }}</td>
                                 <td>
                                     <a (click)="editUsuario(user)" class="btn btn-info">
@@ -54,6 +56,7 @@
                             </tr>
                         </tbody>
                     </table>
+                    <pagination-controls (pageChange)="pageActual = $event"></pagination-controls>
                 </div>
             </div>
         </div>

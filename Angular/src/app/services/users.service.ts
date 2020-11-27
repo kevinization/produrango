@@ -16,8 +16,13 @@ export class UsersService {
    }
 
    // tslint:disable-next-line: typedef
-   getUsuarios(){
+  getUsuarios(){
     return this.http.get(this.URL_API);
+  }
+
+  searchUser( id: string){
+    console.log(id);
+    return this.http.get(this.URL_API + '/' + id);
   }
 
   // tslint:disable-next-line: typedef
